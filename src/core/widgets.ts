@@ -1,104 +1,110 @@
-import { ChildrenType, Widget, WidgetType } from "./core"
+import { ChildrenType, Widget, WidgetType } from "./framework";
 
-type HType = {
-    number ?: number
-    text : string
-    classCSS?: string
-}
-class H extends Widget {
-    constructor({number, text}: HType) {
+export class Div extends Widget{
+    constructor({id, classWidget}: WidgetType, children?: ChildrenType){
         super({
-            tag: "h" + (number ?? 1).toString()
-        })
-        this.children = [text]
+            id,
+            classWidget,
+            tag: "div",
+        }, children)
+    }
+}
+
+interface HType extends WidgetType{
+    text: string
+}
+
+class H extends Widget{
+    constructor({ id, classWidget, tag, text }: HType, children?: ChildrenType){
+        super({
+            id,
+            classWidget,
+            tag: tag,
+        }, [text])
     }
 }
 
 export class H1 extends H {
-    constructor({text, classCSS
-     } :{text: string, classCSS?: string}){
+    constructor({ id, classWidget, text }: HType){
         super({
-            number: 1,
-            text: text,
-            classCSS: classCSS
+            id,
+            classWidget,
+            tag: "h1",
+            text
         })
     }
 }
-
 export class H2 extends H {
-    constructor({text, classCSS
-     } :{text: string, classCSS?: string}){
+    constructor({ id, classWidget, text }: HType) {
         super({
-            number: 2,
-            text: text,
-            classCSS: classCSS
-        })
+            id,
+            classWidget,
+            tag: "h2",
+            text
+        });
     }
 }
-
 export class H3 extends H {
-    constructor({text, classCSS
-     } :{text: string, classCSS?: string}){
+    constructor({ id, classWidget, text }: HType) {
         super({
-            number: 3,
-            text: text,
-            classCSS: classCSS
-        })
+            id,
+            classWidget,
+            tag: "h3",
+            text
+        });
     }
 }
-
 export class H4 extends H {
-    constructor({text, classCSS
-     } :{text: string, classCSS?: string}){
+    constructor({ id, classWidget, text }: HType) {
         super({
-            number: 4,
-            text: text,
-            classCSS: classCSS
-        })
+            id,
+            classWidget,
+            tag: "h4",
+            text
+        });
     }
 }
-
 export class H5 extends H {
-    constructor({text, classCSS
-     } :{text: string, classCSS?: string}){
+    constructor({ id, classWidget, text }: HType) {
         super({
-            number: 5,
-            text: text,
-            classCSS: classCSS
-        })
+            id,
+            classWidget,
+            tag: "h5",
+            text
+        });
     }
 }
-
 export class H6 extends H {
-    constructor({text, classCSS
-     } :{text: string, classCSS?: string}){
+    constructor({ id, classWidget, text }: HType) {
         super({
-            number: 6,
-            text: text,
-            classCSS: classCSS
-        })
+            id,
+            classWidget,
+            tag: "h6",
+            text
+        });
     }
 }
 
-type ButtonType = {
-    variant?: "primary" | "secondary" | "success"
-    classCSS?: string
-    onClick?: Function
-    children?: ChildrenType
+interface ButtonType extends WidgetType{
+    variant?: "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark"
 }
-export class Button extends Widget {
-    onClick?: Function
 
-    constructor({variant, classCSS, onClick, children }: ButtonType){
+export class Button extends Widget{
+    constructor({ id, classWidget, onClick, variant, observers  }: ButtonType, children?: ChildrenType){
         super({
+            id,
             tag: "button",
-            children: children,
-            classCSS: classCSS + ` btn btn-${variant ?? "primary"}`
-        })
-        this.onClick = onClick
-        this.element.onclick = () => {
-            if(onClick)
-                onClick()
+            onClick,
+            observers
+        }, children)
+        
+
+        let classWidgetFinal = ""
+        if (classWidget != undefined ){
+            classWidgetFinal += classWidget
         }
+        if(variant != undefined) 
+            classWidgetFinal += variant ? " btn btn-" + variant : " btn btn-primary"
+        this.classWidget = classWidgetFinal
     }
 }
