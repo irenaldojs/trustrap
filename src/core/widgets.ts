@@ -15,96 +15,138 @@ interface HType extends WidgetType{
 }
 
 class H extends Widget{
-    constructor({ id, classWidget, tag, text }: HType, children?: ChildrenType){
+    constructor({ id, classWidget, tag, observers }: WidgetType, text: string){
         super({
             id,
             classWidget,
             tag: tag,
+            observers
         }, [text])
     }
 }
 
 export class H1 extends H {
-    constructor({ id, classWidget, text }: HType){
+    constructor({ id, classWidget, observers  }: WidgetType, text: string) {
         super({
             id,
             classWidget,
             tag: "h1",
-            text
-        })
+            observers,            
+        }, text);
     }
 }
 export class H2 extends H {
-    constructor({ id, classWidget, text }: HType) {
+    constructor({ id, classWidget, observers  }: WidgetType, text: string) {
         super({
             id,
             classWidget,
             tag: "h2",
-            text
-        });
+            observers,            
+        }, text);
     }
 }
 export class H3 extends H {
-    constructor({ id, classWidget, text }: HType) {
+    constructor({ id, classWidget, observers  }: WidgetType, text: string) {
         super({
             id,
             classWidget,
             tag: "h3",
-            text
-        });
+            observers,            
+        }, text);
     }
 }
 export class H4 extends H {
-    constructor({ id, classWidget, text }: HType) {
+    constructor({ id, classWidget, observers  }: WidgetType, text: string) {
         super({
             id,
             classWidget,
             tag: "h4",
-            text
-        });
+            observers,            
+        }, text);
     }
 }
 export class H5 extends H {
-    constructor({ id, classWidget, text }: HType) {
+    constructor({ id, classWidget, observers  }: WidgetType, text: string) {
         super({
             id,
             classWidget,
             tag: "h5",
-            text
-        });
+            observers,            
+        }, text);
     }
 }
 export class H6 extends H {
-    constructor({ id, classWidget, text }: HType) {
+    constructor({ id, classWidget, observers  }: WidgetType, text: string) {
         super({
             id,
             classWidget,
             tag: "h6",
-            text
-        });
+            observers,            
+        }, text);
     }
 }
-
+export class P extends H{
+    constructor({ id, classWidget, observers  }: WidgetType, text: string) {
+        super({
+            id,
+            classWidget,
+            tag: "p",
+            observers,            
+        }, text);
+    }
+}
+export class Span extends H{
+    constructor({ id, classWidget, observers  }: WidgetType, text: string) {
+        super({
+            id,
+            classWidget,
+            tag: "span",
+            observers,            
+        }, text);
+    }
+}
 interface ButtonType extends WidgetType{
     variant?: "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark"
+    outline?: boolean
+    size?: "sm" | "md" | "lg"
 }
 
 export class Button extends Widget{
-    constructor({ id, classWidget, onClick, variant, observers  }: ButtonType, children?: ChildrenType){
+    variant?: string
+
+    constructor({ id, classWidget, onClick, variant, observers, outline, size  }: ButtonType, children?: ChildrenType){
         super({
             id,
-            tag: "button",
+            tag: "button",        
             onClick,
             observers
         }, children)
-        
+        this.variant = variant ?? "primary"        
+        let classBtn = "btn btn-"
+        outline ? classBtn += "outline-" : false
+        classBtn += this.variant
+        size ? classBtn += " btn-" + size : false
+        let classWidgetFinal = classBtn
 
-        let classWidgetFinal = ""
         if (classWidget != undefined ){
-            classWidgetFinal += classWidget
+            classWidgetFinal += " "+classWidget
         }
-        if(variant != undefined) 
-            classWidgetFinal += variant ? " btn btn-" + variant : " btn btn-primary"
         this.classWidget = classWidgetFinal
+    }
+}
+
+type IconType = "brands" | "solid" | "regular"
+
+export class Icon extends Widget{
+    constructor({ id, classWidget, onClick, observers  }: WidgetType, iconName: string, iconType: IconType){
+        super({
+            id,
+            tag: "i",
+            onClick,
+            observers
+        }, [])
+        let type = iconType ?? "solid"
+        let classIcon = "fa-" + type + " fa-" + iconName
+        this.classWidget = classIcon + " " + classWidget
     }
 }
