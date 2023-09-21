@@ -1,5 +1,6 @@
 export type WidgetType = {
     id?: string
+    name?: string
     classWidget?: string
     tag?: string
     observers?: string[]
@@ -9,6 +10,7 @@ export type ChildrenType = (Widget | string | number)[]
 
 export class Widget {
     id: string
+    name?: string
     classWidget?: string
     tag?: string
     children?: (Widget | string | number)[]
@@ -18,6 +20,7 @@ export class Widget {
     onClick?: Function
     constructor({
         id,
+        name,
         classWidget,
         tag,
         onClick,
@@ -25,6 +28,7 @@ export class Widget {
     }: WidgetType, children?: ChildrenType) {
         observers ? this.observers = observers : false
         this.id = id ?? generateId()
+        name ? this.name = name : false
         classWidget ? this.classWidget = classWidget : false 
         this.tag = tag
         this.children = children

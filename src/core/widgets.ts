@@ -11,101 +11,91 @@ export class Div extends Widget{
 }
 
 interface HType extends WidgetType{
+    tag: string,
     text: string
 }
-
 class H extends Widget{
-    constructor({ id, classWidget, tag, observers }: WidgetType, text: string){
-        super({
-            id,
-            classWidget,
-            tag: tag,
-            observers
-        }, [text])
+    constructor({tag, text}: HType, params: WidgetType, children?: ChildrenType){
+        params.tag = tag
+        var newChildren: ChildrenType = [text]
+        if(children)
+            newChildren = newChildren.concat(children)
+        super(params,newChildren)
     }
 }
-
 export class H1 extends H {
-    constructor({ id, classWidget, observers  }: WidgetType, text: string) {
+    constructor( text: string , params: WidgetType, children?: ChildrenType){ {
         super({
-            id,
-            classWidget,
             tag: "h1",
-            observers,            
-        }, text);
-    }
+            text
+        }, params, children)
+        }
+    }    
 }
 export class H2 extends H {
-    constructor({ id, classWidget, observers  }: WidgetType, text: string) {
+    constructor( text: string , params: WidgetType, children?: ChildrenType){ {
         super({
-            id,
-            classWidget,
             tag: "h2",
-            observers,            
-        }, text);
+            text
+        }, params, children)
+        }
     }
 }
 export class H3 extends H {
-    constructor({ id, classWidget, observers  }: WidgetType, text: string) {
+    constructor( text: string , params: WidgetType, children?: ChildrenType){ {
         super({
-            id,
-            classWidget,
             tag: "h3",
-            observers,            
-        }, text);
+            text
+        }, params, children)
+        }
     }
 }
 export class H4 extends H {
-    constructor({ id, classWidget, observers  }: WidgetType, text: string) {
+    constructor( text: string , params: WidgetType, children?: ChildrenType){ {
         super({
-            id,
-            classWidget,
             tag: "h4",
-            observers,            
-        }, text);
+            text
+        }, params, children)
+        }
     }
 }
 export class H5 extends H {
-    constructor({ id, classWidget, observers  }: WidgetType, text: string) {
+    constructor( text: string , params: WidgetType, children?: ChildrenType){ {
         super({
-            id,
-            classWidget,
             tag: "h5",
-            observers,            
-        }, text);
+            text
+        }, params, children)
+        }
     }
 }
 export class H6 extends H {
-    constructor({ id, classWidget, observers  }: WidgetType, text: string) {
+    constructor( text: string , params: WidgetType, children?: ChildrenType){ {
         super({
-            id,
-            classWidget,
             tag: "h6",
-            observers,            
-        }, text);
+            text
+        }, params, children)
+        }
     }
 }
 export class P extends H{
-    constructor({ id, classWidget, observers  }: WidgetType, text: string) {
+    constructor( text: string , params: WidgetType, children?: ChildrenType){ {
         super({
-            id,
-            classWidget,
             tag: "p",
-            observers,            
-        }, text);
+            text
+        }, params, children)
+        }
     }
 }
 export class Span extends H{
-    constructor({ id, classWidget, observers  }: WidgetType, text: string) {
+    constructor( text: string , params: WidgetType, children?: ChildrenType){ {
         super({
-            id,
-            classWidget,
             tag: "span",
-            observers,            
-        }, text);
+            text
+        }, params, children)
+        }
     }
 }
-interface ButtonType extends WidgetType{
+interface ButtonType{
     variant?: "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark"
     outline?: boolean
     size?: "sm" | "md" | "lg"
@@ -113,40 +103,40 @@ interface ButtonType extends WidgetType{
 
 export class Button extends Widget{
     variant?: string
+    constructor({ variant, outline, size}: ButtonType, params: WidgetType, children?: ChildrenType){
+        params.tag = "button"
+        super(params, children)
 
-    constructor({ id, classWidget, onClick, variant, observers, outline, size  }: ButtonType, children?: ChildrenType){
-        super({
-            id,
-            tag: "button",        
-            onClick,
-            observers
-        }, children)
-        this.variant = variant ?? "primary"        
+        this.variant = variant ?? "primary"
         let classBtn = "btn btn-"
         outline ? classBtn += "outline-" : false
         classBtn += this.variant
         size ? classBtn += " btn-" + size : false
         let classWidgetFinal = classBtn
 
-        if (classWidget != undefined ){
-            classWidgetFinal += " "+classWidget
+        if (params.classWidget != undefined ){
+            classWidgetFinal += " "+params.classWidget
         }
         this.classWidget = classWidgetFinal
     }
 }
 
-type IconType = "brands" | "solid" | "regular"
+type IconStyle = "brands" | "solid" | "regular"
+type IconName = "bootstrap" | "font-awesome" | "github" | "npm" | "linkedin" | "square-x-twitter" | "facebook" | "instagram" | "youtube"
+
+interface IconType{
+    iconName: IconName
+    iconType?: IconStyle
+}
 
 export class Icon extends Widget{
-    constructor({ id, classWidget, onClick, observers  }: WidgetType, iconName: string, iconType: IconType){
-        super({
-            id,
-            tag: "i",
-            onClick,
-            observers
-        }, [])
+    constructor({iconName, iconType }: IconType,params: WidgetType, children?: ChildrenType){
+        params.tag = "i"
+        super(
+            params
+        , children)
         let type = iconType ?? "solid"
         let classIcon = "fa-" + type + " fa-" + iconName
-        this.classWidget = classIcon + " " + classWidget
+        this.classWidget = classIcon + " " + params.classWidget ?? false
     }
 }
