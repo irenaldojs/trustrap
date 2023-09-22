@@ -48,7 +48,7 @@ Com base no que ouvi falar sobre como o React monta o HTML, fiz mais ou menos do
 Usando o padrão comum, `createState()` cria um estado, `setState()` altera o estado e `getState()` traz o valor atual do estado. Sempre que chamamos a função `setState()`, iniciamos o próximo passo para atualizar a página.
 
 **8. Observers:**
-O "pulo do gato" final é que cada componente com estado na tela precisa de dois parâmetros para ser notificado pelo `setState()`. Primeiro: um ID fixo, que não é obrigatório; caso não seja definido no widget, um número aleatório será criado. Segundo: definimos o estado que o componente irá observar. Quando `setState()` é chamado, o `updateVirtualDom()` procurará qual componente tem definido o nome da variável de estado que está sendo atualizada, para alterar o corpo do seu elemento.
+O "pulo do gato" final é que cada componente com estado na tela precisa de dois parâmetros para ser notificado pelo `setState()`. Primeiro: um ID fixo, que não é obrigatório; caso não seja definido no widget, um número aleatório será criado. Segundo: OBSERVERS, definimos no componente que estados irá observar. Quando `setState()` é chamado, o `updateVirtualDom()` procurará qual componente tem definido o nome da variável de estado que está sendo atualizada, para alterar o corpo do seu elemento.
 
 **Considerações:**
 A princípio, o código ficou um pouco verboso; no entanto, no núcleo da framework, está escrito da forma mais simples que consegui. Para quem quiser estudar e entender uma forma mais simples de como funcionam as ferramentas modernas, é uma ótima fonte de estudo. Não pude gastar tanto tempo quanto gostaria, faculdade e trabalho juntos são sempre um desafio. Espero que ajude nos estudos.
