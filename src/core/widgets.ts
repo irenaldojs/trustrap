@@ -75,20 +75,20 @@ export class H6 extends H {
     }
 }
 export class P extends H{
-    constructor( text: string , params: WidgetType, children?: ChildrenType){ {
+    constructor( text: string , params?: WidgetType, children?: ChildrenType){ {
         super({
             tag: "p",
             text
-        }, params, children)
+        }, params ?? {}, children)
         }
     }
 }
 export class Span extends H{
-    constructor( text: string , params: WidgetType, children?: ChildrenType){ {
+    constructor( text: string , params?: WidgetType, children?: ChildrenType){ {
         super({
             tag: "span",
             text
-        }, params, children)
+        }, params ?? {}, children)
         }
     }
 }

@@ -85,13 +85,10 @@ export class Widget {
         }
     }
 }
-export type StateType = {
-    [key: string]: {
-        value: any
-        observers: string[]
-    }
+type StateType = {
+    [key: string]: any    
 }
-export abstract class Page {
+export abstract class Statefull {
     root: string
     rootElement?: Element | null
     virtualDom?: Widget
@@ -122,7 +119,11 @@ export abstract class Page {
      *
      * @returns {void} This function does not return a value.
      */
-    renderDom (): void {
+    renderDom(): void {
+        const parent = document.getElementById(this.root)
+        if (parent) {
+            parent.innerHTML = ""
+        }
         this.virtualDom?.createElement(this.rootElement!)
         if(this.virtualDom?.element){
             this.renterTree(this.virtualDom)
@@ -146,38 +147,44 @@ export abstract class Page {
             }
         })
     }
+    
     /**
      * Creates a new state with the given name and value.
      *
-     * @param {string} name - The name of the state.
-     * @param {any} value - The initial value of the state.
+     * @param {string} nameState - The name of the state to create.
+     * @param {any} value - The value to assign to the state.
      * @return {void} This function does not return anything.
      */
-    createState(name: string, value: any): void {        
-        this.state[name] = {
-            value,
-            observers: []
+    createState(nameState: string, value: any): void {
+        this.state = {
+            ...this.state,
+            [nameState]: value
         }
     }
     /**
-     * Retrieves the value of a specific state by its name.
+     * Retrieves the value of a specific state property.
      *
-     * @param {string} name - The name of the state.
-     * @return {any} The value of the state, or undefined if the state does not exist.
+     * @param {string} name - The name of the state property to retrieve.
+     * @return {any} The value of the specified state property.
      */
     getState(name: string): any {
-        return this.state[name]?.value
+        return this.state[name]
     }
-    /**
-     * Sets the value of a specific state property.
-     *
-     * @param {string} nameState - The name of the state property.
-     * @param {any} value - The value to assign to the state property.
-     * @return {void} This function does not return a value.
-     */
-    setState(nameState: string, value: any): void {
-        this.state[nameState].value = value
-        this.updateVirtualDom(nameState)
+    
+/**
+ * Updates the state with a new value.
+ *
+ * @param {string} stateName - The name of the state to update.
+ * @param {any} value - The new value to assign to the state.
+ * @throws {Error} If the value is invalid.
+ */
+    setState(stateName: string, value: any): void {
+        this.state = {
+            ...this.state,
+            [stateName]: value
+        }
+        
+    this.updateVirtualDom(stateName);
     }
     /**
      * Updates the virtual DOM by performing a full re-render of the component.
@@ -215,6 +222,34 @@ export abstract class Page {
                 this.updateTreeState(child, nameState, pushList)
             }
         })
+    }
+    
+}
+
+type RouterType = {
+    [key: string]: Statefull
+}
+
+export class TruStrap {
+    static routes: RouterType
+    static instances: Statefull[] = []
+    constructor(routes: RouterType){
+        TruStrap.routes = routes
+    }
+    static navigation(path: string) {
+        let instantiate = true
+        this.instances.forEach(instance => {
+            if (instance.root == path) {
+                instantiate = false
+                instance.renderDom()
+            }
+        })
+        if (instantiate) {
+            this.instances.push(this.routes[path])
+            this.routes[path].renderDom()
+            
+            console.log(this.instances)
+        }
     }
     
 }

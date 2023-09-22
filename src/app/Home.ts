@@ -1,8 +1,8 @@
-import { Page, Widget } from "../core/framework";
+import { Statefull, Widget } from "../core/framework";
 import { Button, Div, H1, H5, Span } from "../core/widgets";
 import { FaBrandsIcon, FaSolidIcon } from "../core/fontAwesome/icons";
 
-export class Home extends Page{
+export class Home extends Statefull{
     constructor(root: string){
         super(root)       
     }
