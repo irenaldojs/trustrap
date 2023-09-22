@@ -6,9 +6,9 @@ import { TruStrap } from "./core/framework";
 import { Home } from "./app/Home";
 import { Dashboard } from "./app/Dashboard";
 
-"Instance App";
+("Instance App");
 
 const app = new TruStrap({
   "/": new Home("app"),
-  "/dashboard": new Dashboard("app")
+  "/dashboard": new Dashboard("app"),
 });

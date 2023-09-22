@@ -1,304 +1,304 @@
 type iconBrandsName =
-"accessible-icon" |
-"amazon" |
-"android" |
-"angular" |
-"apple" |
-"atlassian" |
-"bootstrap" |
-"cc-mastercard" |
-"cc-visa" |
-"cloudflare" |
-"codepen" |
-"discord" |
-"discourse" |
-"docker" |
-"dropbox" |
-"dribbble" |
-"etsy" |
-"facebook" |
-"facebook-f" |
-"facebook-messenger" |
-"figma" |
-"firefox" |
-"firefox-browser" |
-"flickr" |
-"flipboard" |
-"font-awesome" |
-"fonticons" |
-"fonticons-fi" |
-"fort-awesome" |
-"fort-awesome-alt" |
-"forumbee" |
-"foursquare" |
-"freebsd" |
-"fulcrum" |
-"galactic-republic" |
-"galactic-senate" |
-"get-pocket" |
-"gg" |
-"gg-circle" |
-"git" |
-"git-alt" |
-"github" |
-"github-alt" |
-"gitlab" |
-"gitter" |
-"glide" |
-"gofore" |
-"golang" |
-"goodreads" |
-"google-drive" |
-"google-pay" |
-"google-plus" |
-"google-plus-g" |
-"google-wallet" |
-"gratipay" |
-"grav" |
-"gripfire" |
-"grunt" |
-"guilded" |
-"gulp" |
-"hacker-news" |
-"hackerrank" |
-"hashnode" |
-"hips" |
-"hire-a-helper" |
-"hive" |
-"hooli" |
-"hornbill" |
-"hotjar" |
-"houzz" |
-"hubspot" |
-"imdb" |
-"instalod" |
-"instagram" |
-"invision" |
-"ioxhost" |
-"itunes" |
-"itunes-note" |
-"jedi-order" |
-"jenkins" |
-"jira" |
-"joget" |
-"joomla" |
-"js" |
-"jsfiddle" |
-"kaggle" |
-"keybase" |
-"keycdn" |
-"kickstarter" |
-"kickstarter-k" |
-"korvue" |
-"laravel" |
-"lastfm" |
-"leanpub" |
-"less" |
-"linkedin" |
-"linkedin-in" |
-"linode" |
-"lyft" |
-"magento" |
-"mailchimp" |
-"mandalorian" |
-"markdown" |
-"mastodon" |
-"maxcdn" |
-"mdb" |
-"medapps" |
-"medrt" |
-"megaport" |
-"mendeley" |
-"meta" |
-"microblog" |
-"mix" |
-"mixcloud" |
-"mixer" |
-"mizuni" |
-"modx" |
-"monero" |
-"napster" |
-"neos" |
-"nfc-directional" |
-"nfc-symbol" |
-"nimblr" |
-"node-js" |
-"npm" |
-"ns8" |
-"nutritionix" |
-"octopus-deploy" |
-"odnoklassniki" |
-"odysee" |
-"old-republic" |
-"opera" |
-"opencart" |
-"optin-monster" |
-"orcid" |
-"osi" |
-"padlet" |
-"page4" |
-"palfed" |
-"patreon" |
-"perbyte" |
-"periscope" |
-"phabricator" |
-"phoenix-framework" |
-"phoenix-squadron" |
-"php" |
-"pied-piper-alt" |
-"pied-piper-hat" |
-"pied-piper-pp" |
-"pied-piper" |
-"pinterest" |
-"pinterest-p" |
-"pix" |
-"pushed" |
-"qq" |
-"quinscape" |
-"quora" |
-"r-project" |
-"raspberry-pi" |
-"ravelry" |
-"reacteurope" |
-"react" |
-"red-river" |
-"reddit" |
-"reddit-alien" |
-"redhat" |
-"renren" |
-"replyd" |
-"researchgate" |
-"resolving" |
-"rev" |
-"rocketchat" |
-"rockrms" |
-"rust" |
-"safari" |
-"sass" |
-"schlix" |
-"screenpal" |
-"scribd" |
-"searchengin" |
-"sellcast" |
-"sellsy" |
-"servicestack" |
-"shirtsinbulk" |
-"shopware" |
-"simplybuilt" |
-"sistrix" |
-"sith" |
-"skitch" |
-"skyatlas" |
-"slack" |
-"slideshare" |
-"snapchat" |
-"sourcetree" |
-"space-awesome" |
-"speaker-deck" |
-"speakap" |
-"spotify" |
-"square-behance" |
-"square-dribbble" |
-"square-facebook" |
-"square-font-awesome" |
-"square-font-awesome-stroke" |
-"square-git" |
-"square-github" |
-"square-gitlab" |
-"square-google-plus" |
-"square-hacker-news" |
-"square-instagram" |
-"square-lastfm" |
-"square-odnoklassniki" |
-"square-pied-piper" |
-"square-reddit" |
-"square-snapchat" |
-"square-steam" |
-"square-threads" |
-"square-tumblr" |
-"square-twitter" |
-"square-viadeo" |
-"square-vimeo" |
-"square-whatsapp" |
-"square-xing" |
-"square-x-twitter" |
-"squarespace" |
-"stack-exchange" |
-"stackpath" |
-"staylinked" |
-"steam" |
-"steam-symbol" |
-"sticker-mule" |
-"strava" |
-"stripe" |
-"stripe-s" |
-"stubber" |
-"studiovinari" |
-"suse" |
-"swift" |
-"symfony" |
-"tencent-weibo" |
-"the-red-yeti" |
-"themeco" |
-"themeisle" |
-"threads" |
-"threejs" |
-"tiktok" |
-"trade-federation" |
-"trello" |
-"tumblr" |
-"typo3" |
-"uber" |
-"ubuntu" |
-"uikit" |
-"umbraco" |
-"uncharted" |
-"uniregistry" |
-"unity" |
-"unsplash" |
-"untappd" |
-"ups" |
-"ussunnah" |
-"usb" |
-"usps" |
-"vaadin" |
-"viacoin" |
-"viadeo" |
-"viber" |
-"vimperator" |
-"vimeo" |
-"vimeo-v" |
-"vine" |
-"vk" |
-"vnv" |
-"vuejs" |
-"watchman-monitoring" |
-"waze" |
-"webcomponents" |
-"weibo" |
-"weixin" |
-"whmcs" |
-"wikipedia-w" |
-"windows" |
-"wix" |
-"wolf-pack-battalion" |
-"wodu" |
-"woocommerce" |
-"wordpress" |
-"wordpress-simple" |
-"wpexplorer" |
-"wpforms" |
-"wpressr" |
-"xbox" |
-"x-twitter" |
-"yahoo" |
-"yammer" |
-"yandex" |
-"yandex-international" |
-"yarn" |
-"yelp" |
-"yoast" |
-"youtube" |
-"zhihu";
+  | "accessible-icon"
+  | "amazon"
+  | "android"
+  | "angular"
+  | "apple"
+  | "atlassian"
+  | "bootstrap"
+  | "cc-mastercard"
+  | "cc-visa"
+  | "cloudflare"
+  | "codepen"
+  | "discord"
+  | "discourse"
+  | "docker"
+  | "dropbox"
+  | "dribbble"
+  | "etsy"
+  | "facebook"
+  | "facebook-f"
+  | "facebook-messenger"
+  | "figma"
+  | "firefox"
+  | "firefox-browser"
+  | "flickr"
+  | "flipboard"
+  | "font-awesome"
+  | "fonticons"
+  | "fonticons-fi"
+  | "fort-awesome"
+  | "fort-awesome-alt"
+  | "forumbee"
+  | "foursquare"
+  | "freebsd"
+  | "fulcrum"
+  | "galactic-republic"
+  | "galactic-senate"
+  | "get-pocket"
+  | "gg"
+  | "gg-circle"
+  | "git"
+  | "git-alt"
+  | "github"
+  | "github-alt"
+  | "gitlab"
+  | "gitter"
+  | "glide"
+  | "gofore"
+  | "golang"
+  | "goodreads"
+  | "google-drive"
+  | "google-pay"
+  | "google-plus"
+  | "google-plus-g"
+  | "google-wallet"
+  | "gratipay"
+  | "grav"
+  | "gripfire"
+  | "grunt"
+  | "guilded"
+  | "gulp"
+  | "hacker-news"
+  | "hackerrank"
+  | "hashnode"
+  | "hips"
+  | "hire-a-helper"
+  | "hive"
+  | "hooli"
+  | "hornbill"
+  | "hotjar"
+  | "houzz"
+  | "hubspot"
+  | "imdb"
+  | "instalod"
+  | "instagram"
+  | "invision"
+  | "ioxhost"
+  | "itunes"
+  | "itunes-note"
+  | "jedi-order"
+  | "jenkins"
+  | "jira"
+  | "joget"
+  | "joomla"
+  | "js"
+  | "jsfiddle"
+  | "kaggle"
+  | "keybase"
+  | "keycdn"
+  | "kickstarter"
+  | "kickstarter-k"
+  | "korvue"
+  | "laravel"
+  | "lastfm"
+  | "leanpub"
+  | "less"
+  | "linkedin"
+  | "linkedin-in"
+  | "linode"
+  | "lyft"
+  | "magento"
+  | "mailchimp"
+  | "mandalorian"
+  | "markdown"
+  | "mastodon"
+  | "maxcdn"
+  | "mdb"
+  | "medapps"
+  | "medrt"
+  | "megaport"
+  | "mendeley"
+  | "meta"
+  | "microblog"
+  | "mix"
+  | "mixcloud"
+  | "mixer"
+  | "mizuni"
+  | "modx"
+  | "monero"
+  | "napster"
+  | "neos"
+  | "nfc-directional"
+  | "nfc-symbol"
+  | "nimblr"
+  | "node-js"
+  | "npm"
+  | "ns8"
+  | "nutritionix"
+  | "octopus-deploy"
+  | "odnoklassniki"
+  | "odysee"
+  | "old-republic"
+  | "opera"
+  | "opencart"
+  | "optin-monster"
+  | "orcid"
+  | "osi"
+  | "padlet"
+  | "page4"
+  | "palfed"
+  | "patreon"
+  | "perbyte"
+  | "periscope"
+  | "phabricator"
+  | "phoenix-framework"
+  | "phoenix-squadron"
+  | "php"
+  | "pied-piper-alt"
+  | "pied-piper-hat"
+  | "pied-piper-pp"
+  | "pied-piper"
+  | "pinterest"
+  | "pinterest-p"
+  | "pix"
+  | "pushed"
+  | "qq"
+  | "quinscape"
+  | "quora"
+  | "r-project"
+  | "raspberry-pi"
+  | "ravelry"
+  | "reacteurope"
+  | "react"
+  | "red-river"
+  | "reddit"
+  | "reddit-alien"
+  | "redhat"
+  | "renren"
+  | "replyd"
+  | "researchgate"
+  | "resolving"
+  | "rev"
+  | "rocketchat"
+  | "rockrms"
+  | "rust"
+  | "safari"
+  | "sass"
+  | "schlix"
+  | "screenpal"
+  | "scribd"
+  | "searchengin"
+  | "sellcast"
+  | "sellsy"
+  | "servicestack"
+  | "shirtsinbulk"
+  | "shopware"
+  | "simplybuilt"
+  | "sistrix"
+  | "sith"
+  | "skitch"
+  | "skyatlas"
+  | "slack"
+  | "slideshare"
+  | "snapchat"
+  | "sourcetree"
+  | "space-awesome"
+  | "speaker-deck"
+  | "speakap"
+  | "spotify"
+  | "square-behance"
+  | "square-dribbble"
+  | "square-facebook"
+  | "square-font-awesome"
+  | "square-font-awesome-stroke"
+  | "square-git"
+  | "square-github"
+  | "square-gitlab"
+  | "square-google-plus"
+  | "square-hacker-news"
+  | "square-instagram"
+  | "square-lastfm"
+  | "square-odnoklassniki"
+  | "square-pied-piper"
+  | "square-reddit"
+  | "square-snapchat"
+  | "square-steam"
+  | "square-threads"
+  | "square-tumblr"
+  | "square-twitter"
+  | "square-viadeo"
+  | "square-vimeo"
+  | "square-whatsapp"
+  | "square-xing"
+  | "square-x-twitter"
+  | "squarespace"
+  | "stack-exchange"
+  | "stackpath"
+  | "staylinked"
+  | "steam"
+  | "steam-symbol"
+  | "sticker-mule"
+  | "strava"
+  | "stripe"
+  | "stripe-s"
+  | "stubber"
+  | "studiovinari"
+  | "suse"
+  | "swift"
+  | "symfony"
+  | "tencent-weibo"
+  | "the-red-yeti"
+  | "themeco"
+  | "themeisle"
+  | "threads"
+  | "threejs"
+  | "tiktok"
+  | "trade-federation"
+  | "trello"
+  | "tumblr"
+  | "typo3"
+  | "uber"
+  | "ubuntu"
+  | "uikit"
+  | "umbraco"
+  | "uncharted"
+  | "uniregistry"
+  | "unity"
+  | "unsplash"
+  | "untappd"
+  | "ups"
+  | "ussunnah"
+  | "usb"
+  | "usps"
+  | "vaadin"
+  | "viacoin"
+  | "viadeo"
+  | "viber"
+  | "vimperator"
+  | "vimeo"
+  | "vimeo-v"
+  | "vine"
+  | "vk"
+  | "vnv"
+  | "vuejs"
+  | "watchman-monitoring"
+  | "waze"
+  | "webcomponents"
+  | "weibo"
+  | "weixin"
+  | "whmcs"
+  | "wikipedia-w"
+  | "windows"
+  | "wix"
+  | "wolf-pack-battalion"
+  | "wodu"
+  | "woocommerce"
+  | "wordpress"
+  | "wordpress-simple"
+  | "wpexplorer"
+  | "wpforms"
+  | "wpressr"
+  | "xbox"
+  | "x-twitter"
+  | "yahoo"
+  | "yammer"
+  | "yandex"
+  | "yandex-international"
+  | "yarn"
+  | "yelp"
+  | "yoast"
+  | "youtube"
+  | "zhihu";
 
 export default iconBrandsName;
