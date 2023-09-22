@@ -20,7 +20,7 @@ export class Dashboard extends Statefull {
               "col-12 col-sm-8 col-md-6 text-center border border-dark rounded p-5 bg-light d-flex flex-column gap-3",
           },
           [
-            new Span("Nova Rota"),
+            new Span("Dashboard"),
             new Button(
               { variant: "primary" },
               {
