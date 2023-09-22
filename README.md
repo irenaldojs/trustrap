@@ -1,6 +1,6 @@
 # TruStrap
 
-[Deploy do projeto](https://trustrap.netlify.app)  <<<<<<<----------------------------------------------
+[--------------------------------------> Deploy do projeto <--------------------------------------------------](https://trustrap.netlify.app)
 
 **Tecnologias Utilizadas:**
 - TypeScript
