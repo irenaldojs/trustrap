@@ -10,7 +10,8 @@ interface IconType {
 }
 
 class Icon extends Widget {
-  constructor({ iconName, iconType }: IconType, params: WidgetType, children?: ChildrenType) {
+  constructor({ iconName, iconType }: IconType, params?: WidgetType, children?: ChildrenType) {
+    params = params ?? {};
     params.tag = "i";
     super(
       params
@@ -20,17 +21,18 @@ class Icon extends Widget {
   }
 }
 export class FaBrandsIcon extends Icon {
-  constructor(iconName: iconBrandsName, params: WidgetType, children?: ChildrenType) {
+  constructor(iconName: iconBrandsName, params?: WidgetType, children?: ChildrenType) {
+    
     super({ iconName, iconType: "brands" }, params, children) 
   }
 }
 export class FaSolidIcon extends Icon {
-  constructor(iconName: iconSolidName, params: WidgetType, children?: ChildrenType) {
+  constructor(iconName: iconSolidName, params?: WidgetType, children?: ChildrenType) {
     super({ iconName, iconType: "solid" }, params, children);
   }
 }
 export class FaRegularIcon extends Icon {
-  constructor(iconName: IconRegularName, params: WidgetType, children?: ChildrenType) {
+  constructor(iconName: IconRegularName, params?: WidgetType, children?: ChildrenType) {
     super({ iconName, iconType: "regular" }, params, children);
   }
 }

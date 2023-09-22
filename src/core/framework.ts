@@ -202,7 +202,7 @@ export abstract class Statefull {
         list.forEach(widget => {
             widget.updateElement(widget)
         })
-        
+        this.virtualDom = newVirtualDom
     }
     /**
      * Updates the state of the tree.
@@ -235,9 +235,15 @@ export class TruStrap {
     static instances: Statefull[] = []
     constructor(routes: RouterType){
         TruStrap.routes = routes
+        window.addEventListener("popstate", this.handleRouteChange)
+
+        this.handleRouteChange()
     }
     static navigation(path: string) {
         let instantiate = true
+        if(window.location.pathname != path)
+            window.history.pushState({}, "", path)
+        console.log(path)
         this.instances.forEach(instance => {
             if (instance.root == path) {
                 instantiate = false
@@ -246,12 +252,15 @@ export class TruStrap {
         })
         if (instantiate) {
             this.instances.push(this.routes[path])
-            this.routes[path].renderDom()
-            
-            console.log(this.instances)
+            this.routes[path].renderDom()            
         }
     }
     
+    handleRouteChange() {
+
+        const currentURL = window.location.pathname
+        TruStrap.navigation(currentURL)
+    }
 }
 /**
  * Generates a unique ID.

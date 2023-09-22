@@ -1,4 +1,4 @@
-import { Statefull, Widget } from "../core/framework";
+import { Statefull, TruStrap, Widget } from "../core/framework";
 import { Button, Div, H1, H5, Span } from "../core/widgets";
 import { FaBrandsIcon, FaSolidIcon } from "../core/fontAwesome/icons";
 
@@ -20,19 +20,9 @@ export class Home extends Statefull{
                 new H1("Ola mundo!",{ classWidget: "mb-5" }),
                 new Div({}, [
                     new H5("Teste da framework, com controle de estado pela pagina renderizada" ,{ classWidget: "mb-3" }),
-                    new Button({
-                        variant: "success",
-                        outline: true,
-                        size: "sm",
-                    },{
-                      onClick: () => {
-                      this.setState("count", this.getState("count") + 1)
-                      }
-                    }, [
-                        new Span("Contagem " + this.getState("count"),{id: "contador", observers: ["count"], classWidget: "px-2"}),                        
-                    ])
+                    
                 ]),
-                new Div({classWidget: "my-2 d-flex justify-content-around gap-2 fs-1"}, [
+                new Div({classWidget: "my-2 d-flex justify-content-center gap-2 fs-1 flex-wrap"}, [
                     new FaBrandsIcon("font-awesome", { classWidget: "text-primary-emphasis" }),
                     new FaBrandsIcon("bootstrap",{ classWidget: "text-purple"}),
                     new FaBrandsIcon("github",{ classWidget: "text-dark"}),
@@ -42,8 +32,23 @@ export class Home extends Statefull{
                     new FaBrandsIcon("facebook",{ classWidget: "text-primary"}),
                     new FaBrandsIcon("instagram",{ classWidget: "text-danger"}),
                     new FaBrandsIcon("youtube", { classWidget: "text-danger" }),
-                    new FaSolidIcon("network-wired",{ classWidget: "text-dark"}),
-                    
+                    new FaSolidIcon("network-wired",{ classWidget: "text-dark"}),                    
+                ]),
+                new Div({classWidget: "mt-3 d-flex justify-content-center gap-2"}, [
+                    new Button({
+                        variant: "success",
+                        outline: true,
+                        size: "sm",
+                    },{
+                      onClick: () => this.setState("count", this.getState("count") + 1)}, [
+                        new Span("Contagem " + this.getState("count"),{id: "contador", observers: ["count"], classWidget: "px-2"}),                        
+                    ]),
+                    new Button({
+                        variant: "primary",
+                        size: "sm",
+                    }, {onClick: () => TruStrap.navigation("/dashboard")},[
+                        "Rota do Dashboard"
+                    ])
                 ])
             ])
         ])
