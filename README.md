@@ -1,12 +1,13 @@
 # TruStrap
 
+[Deploy do projeto](https://trustrap.netlify.app)
+
 **Tecnologias Utilizadas:**
 - TypeScript
 - Vite
 - Bootstrap
 - FontAwesome
-
-
+<img src="https://github.com/irenaldojs/trustrap/blob/atual/public/tela_trustrap.png" />
 
 
 **Introdução:**
