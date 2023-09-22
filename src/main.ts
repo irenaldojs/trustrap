@@ -8,7 +8,7 @@ import { Dashboard } from "./app/Dashboard";
 
 ("Instance App");
 
-new TruStrap({
+const app = new TruStrap({
   "/": new Home("app"),
   "/dashboard": new Dashboard("app"),
 });
