@@ -9,6 +9,8 @@
 - FontAwesome
 <img src="https://github.com/irenaldojs/trustrap/blob/atual/public/tela_trustrap.png" />
 
+**Instalacao**
+Usamos o Vite por baixo, entao e copiar o projeto e dar um "npm i" e depois "npm run dev"
 
 **Introdução:**
 
