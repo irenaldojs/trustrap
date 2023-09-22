@@ -10,7 +10,12 @@
 <img src="https://github.com/irenaldojs/trustrap/blob/atual/public/tela_trustrap.png" />
 
 **Instalacao**
-Usamos o Vite por baixo, entao e copiar o projeto e dar um "npm i" e depois "npm run dev"
+
+Para começar, utilize o Vite como base. Basta copiar o projeto e executar os seguintes comandos no terminal:
+- npm i - Isso irá instalar as dependências do projeto.
+- npm run dev - Isso iniciará o servidor de desenvolvimento.
+Siga esses passos simples para configurar o ambiente e começar a trabalhar com o projeto.
+
 
 **Introdução:**
 
