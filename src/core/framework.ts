@@ -40,18 +40,12 @@ export class Widget {
      * @param {Element} parentElement - The parent element to append the element to.
      * @throws {Error} If the element is null.
      */
-    createElement (parenElement: Element): void {
+    createElement (parentElement: Element): void {
         this.element = document.createElement(this.tag ?? "div")
-        if(this.element){            
-            this.element.id = this.id
-            if(this.classWidget != undefined)
-                this.element.className = this.classWidget
-            this.element.onclick = () => {
-                if(this.onClick)
-                    this.onClick()
-            }
-            parenElement.append(this.element)
-            this.parent = parenElement
+        if(this.element){
+            this.configElement()
+            parentElement.append(this.element)
+            this.parent = parentElement
         }else{
             throw new Error("Element is null")
         }
@@ -67,13 +61,7 @@ export class Widget {
         this.element = document.createElement(this.tag ?? "div")
         this.children = widget.children
         if (this.element) {
-            this.element.id = widget.id;
-            if (widget.classWidget != undefined)
-                this.element.className = widget.classWidget;
-            this.element.onclick = () => {
-                if (widget.onClick)
-                    widget.onClick();
-            };
+            this.configElement()
         }
         oldElement?.parentNode?.replaceChild(this.element, oldElement);
         this.children?.forEach(child => {
@@ -84,6 +72,18 @@ export class Widget {
             }
         })
     }
+    configElement() {
+        if (!this.element) return
+        
+        this.element.id = this.id;
+        if (this.classWidget != undefined)
+            this.element.className = this.classWidget;        
+        this.name ? this.element.setAttribute("name", this.name) : false
+        this.element.onclick = () => {
+            if (this.onClick)
+                this.onClick();
+        }
+    }
 }
 export type StateType = {
     [key: string]: {
@@ -91,7 +91,6 @@ export type StateType = {
         observers: string[]
     }
 }
-
 export abstract class Page {
     root: string
     rootElement?: Element | null
@@ -194,7 +193,6 @@ export abstract class Page {
 
         this.updateTreeState(newVirtualDom, nameState, pushList)
         list.forEach(widget => {
-            console.log(widget)
             widget.updateElement(widget)
         })
         

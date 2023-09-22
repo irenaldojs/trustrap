@@ -1,5 +1,6 @@
 import { Page, Widget } from "../core/framework";
-import { Button, Div, H1, H5, Icon, Span } from "../core/widgets";
+import { Button, Div, H1, H5, Span } from "../core/widgets";
+import { FaBrandsIcon, FaSolidIcon } from "../core/fontAwesome/icons";
 
 export class Home extends Page{
     constructor(root: string){
@@ -13,6 +14,7 @@ export class Home extends Page{
             classWidget: "vh-100 d-flex justify-content-center align-items-center bg-secondary px-2 px-sm-0",
         }, [
             new Div({
+                name: "home",
                 classWidget: "col-12 col-sm-8 col-md-6 text-center border border-dark rounded p-5 bg-light",
             }, [
                 new H1("Ola mundo!",{ classWidget: "mb-5" }),
@@ -31,15 +33,16 @@ export class Home extends Page{
                     ])
                 ]),
                 new Div({classWidget: "my-2 d-flex justify-content-around gap-2 fs-1"}, [
-                    new Icon({ iconName: "font-awesome", iconType: "brands" },{ classWidget: "text-primary-emphasis"}),
-                    new Icon({ iconName: "github", iconType: "brands" },{ classWidget: "text-dark"}),
-                    new Icon({ iconName: "bootstrap", iconType: "brands" },{ classWidget: "text-purple"}),
-                    new Icon({ iconName: "npm", iconType: "brands" },{ classWidget: "text-success"}),
-                    new Icon({ iconName: "linkedin", iconType: "brands" },{ classWidget: "text-primary"}),
-                    new Icon({ iconName: "square-x-twitter", iconType: "brands" },{ classWidget: "text-dark"}),
-                    new Icon({ iconName: "facebook", iconType: "brands" },{ classWidget: "text-primary"}),
-                    new Icon({ iconName: "instagram", iconType: "brands" },{ classWidget: "text-danger"}),
-                    new Icon({ iconName: "youtube", iconType: "brands" },{ classWidget: "text-danger"}),
+                    new FaBrandsIcon("font-awesome", { classWidget: "text-primary-emphasis" }),
+                    new FaBrandsIcon("bootstrap",{ classWidget: "text-purple"}),
+                    new FaBrandsIcon("github",{ classWidget: "text-dark"}),
+                    new FaBrandsIcon("npm",{ classWidget: "text-success"}),
+                    new FaBrandsIcon("linkedin",{ classWidget: "text-primary"}),
+                    new FaBrandsIcon("square-x-twitter",{ classWidget: "text-dark"}),
+                    new FaBrandsIcon("facebook",{ classWidget: "text-primary"}),
+                    new FaBrandsIcon("instagram",{ classWidget: "text-danger"}),
+                    new FaBrandsIcon("youtube", { classWidget: "text-danger" }),
+                    new FaSolidIcon("network-wired",{ classWidget: "text-dark"}),
                     
                 ])
             ])

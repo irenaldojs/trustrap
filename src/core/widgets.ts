@@ -1,12 +1,9 @@
 import { ChildrenType, Widget, WidgetType } from "./framework";
 
 export class Div extends Widget{
-    constructor({id, classWidget}: WidgetType, children?: ChildrenType){
-        super({
-            id,
-            classWidget,
-            tag: "div",
-        }, children)
+    constructor(params: WidgetType, children?: ChildrenType) {
+        params.tag = "div"
+        super(params, children)
     }
 }
 
@@ -118,25 +115,5 @@ export class Button extends Widget{
             classWidgetFinal += " "+params.classWidget
         }
         this.classWidget = classWidgetFinal
-    }
-}
-
-type IconStyle = "brands" | "solid" | "regular"
-type IconName = "bootstrap" | "font-awesome" | "github" | "npm" | "linkedin" | "square-x-twitter" | "facebook" | "instagram" | "youtube"
-
-interface IconType{
-    iconName: IconName
-    iconType?: IconStyle
-}
-
-export class Icon extends Widget{
-    constructor({iconName, iconType }: IconType,params: WidgetType, children?: ChildrenType){
-        params.tag = "i"
-        super(
-            params
-        , children)
-        let type = iconType ?? "solid"
-        let classIcon = "fa-" + type + " fa-" + iconName
-        this.classWidget = classIcon + " " + params.classWidget ?? false
     }
 }
