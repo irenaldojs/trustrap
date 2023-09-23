@@ -18,3 +18,27 @@
 .text-purple {
   color: purple
 }
+
+.div-pokemon {
+  width: 200px;
+}
+
+.img-pokemon {
+  height: 200px;
+}
+
+.bg-pokemon {
+  background-image: url("../public/background.jpg");
+  background-size: cover ;
+  background-repeat: no-repeat;
+}
+
+.card-pokemon {
+  padding: 15px;
+  transition: 200ms;
+}
+
+.card-pokemon:hover {
+  padding: 5px;
+  cursor: pointer;
+}

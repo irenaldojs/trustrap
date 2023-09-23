@@ -3,12 +3,12 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./style.css";
 import { TruStrap } from "./core/framework";
 
-import { Home } from "./app/Home";
-import { Dashboard } from "./app/Dashboard";
+import {Home, Dashboard, Pokedex} from "./app/routes"
 
 ("Instance App");
 
 const app = new TruStrap({
-  "/": new Home("app"),
-  "/dashboard": new Dashboard("app"),
+  "/": Home,
+  "/dashboard": Dashboard,
+  "/pokedex": Pokedex,
 });

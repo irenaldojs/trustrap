@@ -2,6 +2,7 @@ export type WidgetType = {
   id?: string;
   name?: string;
   classWidget?: string;
+  src?: string;
   tag?: string;
   observers?: string[];
   onClick?: Function;
@@ -13,13 +14,14 @@ export class Widget {
   name?: string;
   classWidget?: string;
   tag?: string;
+  src?: string;
   children?: (Widget | string | number)[];
   parent?: Element;
   element?: HTMLElement;
   observers: string[] = [];
   onClick?: Function;
   constructor(
-    { id, name, classWidget, tag, onClick, observers }: WidgetType,
+    { id, name, classWidget, tag, onClick, observers, src }: WidgetType,
     children?: ChildrenType
   ) {
     observers ? (this.observers = observers) : false;
@@ -29,6 +31,7 @@ export class Widget {
     this.tag = tag;
     this.children = children;
     this.onClick = onClick;
+    this.src = src;
   }
   /**
    * Creates an element and appends it to the parent widget.
@@ -75,6 +78,7 @@ export class Widget {
     if (this.classWidget != undefined)
       this.element.className = this.classWidget;
     this.name ? this.element.setAttribute("name", this.name) : false;
+    this.src ? this.element.setAttribute("src", this.src) : false;
     this.element.onclick = () => {
       if (this.onClick) this.onClick();
     };
@@ -92,15 +96,12 @@ export abstract class Statefull {
   constructor(root: string) {
     this.root = root;
     this.rootElement = document.getElementById(this.root);
-
+    if (!this.rootElement) throw new Error("Root element not found");
     this.mountState();
-    if (this.rootElement) {
-      this.virtualDom = this.mountTree();
-      this.renderDom();
-    } else {
-      throw new Error("Root element not found");
-    }
+    this.virtualDom = this.mountTree();
+    this.renderDom();
   }
+
   abstract mountState(): void;
   abstract mountTree(): Widget;
 
@@ -113,8 +114,9 @@ export abstract class Statefull {
    *
    * @returns {void} This function does not return a value.
    */
-  renderDom(): void {
+  async renderDom() {
     const parent = document.getElementById(this.root);
+
     if (parent) {
       parent.innerHTML = "";
     }
@@ -213,14 +215,16 @@ export abstract class Statefull {
             pushList(child);
           }
         });
+
         this.updateTreeState(child, nameState, pushList);
+       
       }
     });
   }
 }
 
 type RouterType = {
-  [key: string]: Statefull;
+  [key: string]: any;
 };
 
 export class TruStrap {
@@ -228,30 +232,26 @@ export class TruStrap {
   static instances: Statefull[] = [];
   constructor(routes: RouterType) {
     TruStrap.routes = routes;
-    window.addEventListener("popstate", this.handleRouteChange);
-
-    this.handleRouteChange();
+    TruStrap.navigation("/");
   }
   static navigation(path: string) {
     let instantiate = true;
-    if (window.location.pathname != path)
-      window.history.pushState({}, "", path);
-    console.log(path);
+
     this.instances.forEach((instance) => {
       if (instance.root == path) {
         instantiate = false;
         instance.renderDom();
+        console.log("instanciado")
       }
     });
     if (instantiate) {
-      this.instances.push(this.routes[path]);
-      this.routes[path].renderDom();
+      const instance = new this.routes[path]("app");
+      TruStrap.instances.push(instance);
+      instance.renderDom();
     }
   }
 
   handleRouteChange() {
-    const currentURL = window.location.pathname;
-    TruStrap.navigation(currentURL);
   }
 }
 /**

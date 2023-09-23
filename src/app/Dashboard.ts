@@ -2,7 +2,7 @@ import { FaSolidIcon } from "../core/fontAwesome/icons";
 import { Statefull, TruStrap, Widget } from "../core/framework";
 import { Button, Div, Span } from "../core/widgets";
 
-export class Dashboard extends Statefull {
+export default class Dashboard extends Statefull {
   constructor(root: string) {
     super(root);
   }

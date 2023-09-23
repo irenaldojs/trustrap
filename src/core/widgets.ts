@@ -24,84 +24,84 @@ class H extends Widget {
   }
 }
 export class H1 extends H {
-  constructor(text: string, params: WidgetType, children?: ChildrenType) {
+  constructor(text: string, params?: WidgetType, children?: ChildrenType) {
     {
       super(
         {
           tag: "h1",
           text,
         },
-        params,
+        params ?? {},
         children
       );
     }
   }
 }
 export class H2 extends H {
-  constructor(text: string, params: WidgetType, children?: ChildrenType) {
+  constructor(text: string, params?: WidgetType, children?: ChildrenType) {
     {
       super(
         {
           tag: "h2",
           text,
         },
-        params,
+        params ?? {},
         children
       );
     }
   }
 }
 export class H3 extends H {
-  constructor(text: string, params: WidgetType, children?: ChildrenType) {
+  constructor(text: string, params?: WidgetType, children?: ChildrenType) {
     {
       super(
         {
           tag: "h3",
           text,
         },
-        params,
+        params ?? {},
         children
       );
     }
   }
 }
 export class H4 extends H {
-  constructor(text: string, params: WidgetType, children?: ChildrenType) {
+  constructor(text: string, params?: WidgetType, children?: ChildrenType) {
     {
       super(
         {
           tag: "h4",
           text,
         },
-        params,
+        params ?? {},
         children
       );
     }
   }
 }
 export class H5 extends H {
-  constructor(text: string, params: WidgetType, children?: ChildrenType) {
+  constructor(text: string, params?: WidgetType, children?: ChildrenType) {
     {
       super(
         {
           tag: "h5",
           text,
         },
-        params,
+        params ?? {},
         children
       );
     }
   }
 }
 export class H6 extends H {
-  constructor(text: string, params: WidgetType, children?: ChildrenType) {
+  constructor(text: string, params?: WidgetType, children?: ChildrenType) {
     {
       super(
         {
           tag: "h6",
           text,
         },
-        params,
+        params ?? {},
         children
       );
     }
@@ -170,5 +170,14 @@ export class Button extends Widget {
       classWidgetFinal += " " + params.classWidget;
     }
     this.classWidget = classWidgetFinal;
+  }
+}
+
+export class Img extends Widget {
+  constructor(src: string, params?: WidgetType, children?: ChildrenType) {
+    params = params ?? {};
+    params.tag = "img";
+    params.src = src;
+    super(params, children);
   }
 }

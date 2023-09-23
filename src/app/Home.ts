@@ -2,7 +2,7 @@ import { Statefull, TruStrap, Widget } from "../core/framework";
 import { Button, Div, H1, H5, Span } from "../core/widgets";
 import { FaBrandsIcon, FaSolidIcon } from "../core/fontAwesome/icons";
 
-export class Home extends Statefull {
+export default class Home extends Statefull {
   constructor(root: string) {
     super(root);
   }
@@ -70,6 +70,14 @@ export class Home extends Statefull {
                   },
                   { onClick: () => TruStrap.navigation("/dashboard") },
                   ["Rota do Dashboard"]
+                ),
+                new Button(
+                  {
+                    variant: "primary",
+                    size: "sm",
+                  },
+                  { onClick: () => TruStrap.navigation("/pokedex") },
+                  ["Rota do Pokedex"]
                 ),
               ]
             ),
