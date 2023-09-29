@@ -1,5 +1,5 @@
 import { FaSolidIcon } from "../core/fontAwesome/icons";
-import { Statefull, Widget } from "../core/framework";
+import { Statefull, TruStrap, Widget } from "../core/framework";
 import { Button, Div, H1, H5, Img, Span, Spinner } from "../core/widgets";
 
 type PokemonBaseType = {
@@ -108,10 +108,6 @@ export default class Pokedex extends Statefull {
     if (children.length == this.data.length) {
       this.setState("pokemons", children);
     }
-  }
-
-  mountFutureBuild() {
-    //this.mountPokemonsDiv();
   }
 
   mountTree(): Widget {

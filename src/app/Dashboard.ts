@@ -29,7 +29,7 @@ export default class Dashboard extends Statefull {
                 classWidget:
                   "d-flex align-items-center justify-content-center gap-2",
                 onClick: () => {
-                  TruStrap.navigation("/");
+                  this.navigation("/");
                 },
               },
               [new FaSolidIcon("arrow-left"), "Voltar"]

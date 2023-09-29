@@ -105,7 +105,9 @@ export class Widget {
 type StateType = {
   [key: string]: any;
 };
+
 export abstract class Statefull {
+  app?: TruStrap;
   root: string;
   rootElement?: Element | null;
   virtualDom?: Widget;
@@ -126,6 +128,7 @@ export abstract class Statefull {
   abstract mountTree(): Widget;
   mountState(): void {}
   mountFutureBuild(): void {}
+
   /**
    * Renders the DOM.
    *
@@ -243,20 +246,28 @@ export abstract class Statefull {
       }
     });
   }
+
+  navigation(path: string) {
+    this.app?.navigation(path);
+  }
 }
 
 type RouterType = {
-  [key: string]: any;
+  [key: string]: {
+    render: any;
+    root: string;
+  };
 };
 
 export class TruStrap {
-  static routes: RouterType;
-  static instances: Statefull[] = [];
+  routes: RouterType;
+  instances: Statefull[] = [];
+
   constructor(routes: RouterType) {
-    TruStrap.routes = routes;
-    TruStrap.navigation("/");
+    this.routes = routes;
+    this.navigation("/");
   }
-  static navigation(path: string) {
+  navigation(path: string) {
     let instantiate = true;
 
     this.instances.forEach((instance) => {
@@ -266,15 +277,22 @@ export class TruStrap {
       }
     });
     if (instantiate) {
-      const instance = new this.routes[path]("app", path);
-      instance.router = path;
-      TruStrap.instances.push(instance);
-      instance.renderDom();
+      const { render, root } = this.routes[path];
+      const instance = new render(root);
+      if (instance && instance instanceof Statefull) {
+        instance.app = this;
+        instance.router = path;
+        this.instances.push(instance);
+        instance.renderDom();
+      }
     }
   }
-
-  handleRouteChange() {}
 }
+
+export function createTruStrap(routes: RouterType) {
+  return new TruStrap(routes);
+}
+
 /**
  * Generates a unique ID.
  *

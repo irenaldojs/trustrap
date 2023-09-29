@@ -1,4 +1,4 @@
-import { Statefull, TruStrap, Widget } from "../core/framework";
+import { Statefull, Widget } from "../core/framework";
 import { Button, Div, H1, H5, Span } from "../core/widgets";
 import { FaBrandsIcon, FaSolidIcon } from "../core/fontAwesome/icons";
 
@@ -6,6 +6,7 @@ export default class Home extends Statefull {
   constructor(root: string) {
     super(root);
   }
+
   mountState(): void {
     this.createState("count", 0);
   }
@@ -68,7 +69,7 @@ export default class Home extends Statefull {
                     variant: "primary",
                     size: "sm",
                   },
-                  { onClick: () => TruStrap.navigation("/dashboard") },
+                  { onClick: () => this.navigation("/dashboard") },
                   ["Rota do Dashboard"]
                 ),
                 new Button(
@@ -76,7 +77,7 @@ export default class Home extends Statefull {
                     variant: "primary",
                     size: "sm",
                   },
-                  { onClick: () => TruStrap.navigation("/pokedex") },
+                  { onClick: () => this.navigation("/pokedex") },
                   ["Rota do Pokedex"]
                 ),
               ]
