@@ -7,7 +7,7 @@ import {Home, Dashboard, Pokedex} from "./app/routes"
 
 ("Instance App");
 
-const app = new TruStrap({
+new TruStrap({
   "/": Home,
   "/dashboard": Dashboard,
   "/pokedex": Pokedex,

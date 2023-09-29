@@ -6,6 +6,13 @@ export class Div extends Widget {
     super(params, children);
   }
 }
+export class FutureBuild extends Widget {
+  futureBuild: Boolean = true;
+  constructor(params: WidgetType, children?: ChildrenType) {
+    params.tag = "div";
+    super(params, children);
+  }
+}
 
 interface HType extends WidgetType {
   tag: string;
@@ -148,7 +155,6 @@ interface ButtonType {
   outline?: boolean;
   size?: "sm" | "md" | "lg";
 }
-
 export class Button extends Widget {
   variant?: string;
   constructor(
@@ -172,12 +178,26 @@ export class Button extends Widget {
     this.classWidget = classWidgetFinal;
   }
 }
-
 export class Img extends Widget {
   constructor(src: string, params?: WidgetType, children?: ChildrenType) {
     params = params ?? {};
     params.tag = "img";
     params.src = src;
     super(params, children);
+  }
+}
+
+export class Spinner extends Widget {
+  constructor(params?: WidgetType) {
+    params = params ?? {};
+    params.classWidget = params.classWidget + " spinner-border";
+    params.tag = "div";
+
+    super(params, [
+      new Span("Loading...", {
+        classWidget: "visually-hidden",
+        role: "status",
+      }),
+    ]);
   }
 }

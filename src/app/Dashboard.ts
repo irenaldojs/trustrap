@@ -7,6 +7,8 @@ export default class Dashboard extends Statefull {
     super(root);
   }
   mountState(): void {}
+  mountFutureBuild(): void {}
+
   mountTree(): Widget {
     return new Div(
       {

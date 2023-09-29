@@ -5,7 +5,9 @@ export type WidgetType = {
   src?: string;
   tag?: string;
   observers?: string[];
+  promise?: boolean;
   onClick?: Function;
+  role?: "button" | "status" | undefined;
 };
 export type ChildrenType = (Widget | string | number)[];
 
@@ -20,8 +22,20 @@ export class Widget {
   element?: HTMLElement;
   observers: string[] = [];
   onClick?: Function;
+  promise?: boolean;
+  role?: "button" | "status" | undefined;
   constructor(
-    { id, name, classWidget, tag, onClick, observers, src }: WidgetType,
+    {
+      id,
+      name,
+      classWidget,
+      tag,
+      onClick,
+      observers,
+      src,
+      promise,
+      role,
+    }: WidgetType,
     children?: ChildrenType
   ) {
     observers ? (this.observers = observers) : false;
@@ -32,6 +46,8 @@ export class Widget {
     this.children = children;
     this.onClick = onClick;
     this.src = src;
+    this.promise = promise;
+    this.role = role;
   }
   /**
    * Creates an element and appends it to the parent widget.
@@ -39,15 +55,32 @@ export class Widget {
    * @param {Element} parentElement - The parent element to append the element to.
    * @throws {Error} If the element is null.
    */
-  createElement(parentElement: Element): void {
+  renderElement(parent: Element, oldElement?: Element): Element {
     this.element = document.createElement(this.tag ?? "div");
+
     if (this.element) {
       this.configElement();
-      parentElement.append(this.element);
-      this.parent = parentElement;
+
+      if (oldElement) {
+        parent?.replaceChild(this.element, oldElement);
+      } else if (parent) {
+        parent.append(this.element);
+        this.parent = parent;
+      }
+
+      if (this.children && this.element) {
+        this.children.forEach((child) => {
+          if (child instanceof Widget) {
+            child.renderElement(this.element!);
+          } else {
+            this.element?.append(child.toString());
+          }
+        });
+      }
     } else {
       throw new Error("Element is null");
     }
+    return this.element;
   }
   /**
    * Updates the element of the widget with the provided widget.
@@ -55,22 +88,6 @@ export class Widget {
    * @param {Widget} widget - The widget used to update the element.
    * @return {void} This function does not return a value.
    */
-  updateElement(widget: Widget): void {
-    var oldElement = document.getElementById(this.id);
-    this.element = document.createElement(this.tag ?? "div");
-    this.children = widget.children;
-    if (this.element) {
-      this.configElement();
-    }
-    oldElement?.parentNode?.replaceChild(this.element, oldElement);
-    this.children?.forEach((child) => {
-      if (child instanceof Widget) {
-        child.updateElement(child);
-      } else {
-        this.element?.append(child.toString());
-      }
-    });
-  }
   configElement() {
     if (!this.element) return;
 
@@ -79,6 +96,7 @@ export class Widget {
       this.element.className = this.classWidget;
     this.name ? this.element.setAttribute("name", this.name) : false;
     this.src ? this.element.setAttribute("src", this.src) : false;
+    this.role ? this.element.setAttribute("role", this.role) : false;
     this.element.onclick = () => {
       if (this.onClick) this.onClick();
     };
@@ -92,19 +110,22 @@ export abstract class Statefull {
   rootElement?: Element | null;
   virtualDom?: Widget;
   state: StateType = {};
+  router?: string;
 
   constructor(root: string) {
     this.root = root;
     this.rootElement = document.getElementById(this.root);
     if (!this.rootElement) throw new Error("Root element not found");
+
     this.mountState();
     this.virtualDom = this.mountTree();
     this.renderDom();
+    this.mountFutureBuild();
   }
 
-  abstract mountState(): void;
   abstract mountTree(): Widget;
-
+  mountState(): void {}
+  mountFutureBuild(): void {}
   /**
    * Renders the DOM.
    *
@@ -114,15 +135,12 @@ export abstract class Statefull {
    *
    * @returns {void} This function does not return a value.
    */
-  async renderDom() {
+  renderDom(): void {
     const parent = document.getElementById(this.root);
 
     if (parent) {
       parent.innerHTML = "";
-    }
-    this.virtualDom?.createElement(this.rootElement!);
-    if (this.virtualDom?.element) {
-      this.renterTree(this.virtualDom);
+      this.virtualDom?.renderElement(parent);
     }
   }
   /**
@@ -135,7 +153,7 @@ export abstract class Statefull {
     widget.children?.forEach((child) => {
       if (child instanceof Widget) {
         if (widget.element) {
-          child.createElement(widget.element);
+          child.renderElement(widget.element);
         }
         this.renterTree(child);
       } else {
@@ -179,7 +197,6 @@ export abstract class Statefull {
       ...this.state,
       [stateName]: value,
     };
-
     this.updateVirtualDom(stateName);
   }
   /**
@@ -189,15 +206,22 @@ export abstract class Statefull {
    */
   updateVirtualDom(nameState: string) {
     var newVirtualDom = this.mountTree();
+
     let list: Widget[] = [];
     const pushList = (newWidget: Widget) => {
       list.push(newWidget);
     };
 
     this.updateTreeState(newVirtualDom, nameState, pushList);
+
     list.forEach((widget) => {
-      widget.updateElement(widget);
+      const oldElement = document.getElementById(widget.id);
+      const parentElement = oldElement?.parentElement;
+      if (oldElement && parentElement) {
+        widget.renderElement(parentElement, oldElement);
+      }
     });
+
     this.virtualDom = newVirtualDom;
   }
   /**
@@ -215,9 +239,7 @@ export abstract class Statefull {
             pushList(child);
           }
         });
-
         this.updateTreeState(child, nameState, pushList);
-       
       }
     });
   }
@@ -238,21 +260,20 @@ export class TruStrap {
     let instantiate = true;
 
     this.instances.forEach((instance) => {
-      if (instance.root == path) {
+      if (instance.router == path) {
         instantiate = false;
         instance.renderDom();
-        console.log("instanciado")
       }
     });
     if (instantiate) {
-      const instance = new this.routes[path]("app");
+      const instance = new this.routes[path]("app", path);
+      instance.router = path;
       TruStrap.instances.push(instance);
       instance.renderDom();
     }
   }
 
-  handleRouteChange() {
-  }
+  handleRouteChange() {}
 }
 /**
  * Generates a unique ID.
