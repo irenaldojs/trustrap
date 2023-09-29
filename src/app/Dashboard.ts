@@ -1,4 +1,4 @@
-import { FaSolidIcon } from "../core/fontAwesome/icons";
+import { FaSolid } from "../core/fontAwesome/icons";
 import { Statefull, Widget } from "../core/framework";
 import { Button, Div, Span } from "../core/widgets";
 
@@ -29,7 +29,7 @@ export default class Dashboard extends Statefull {
                   this.navigation("/");
                 },
               },
-              [new FaSolidIcon("arrow-left"), "Voltar"]
+              [FaSolid("arrow-left"), "Voltar"]
             ),
           ]
         ),

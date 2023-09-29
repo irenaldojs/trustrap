@@ -1,4 +1,4 @@
-import { FaSolidIcon } from "../core/fontAwesome/icons";
+import { FaSolid } from "../core/fontAwesome/icons";
 import { Statefull, Widget } from "../core/framework";
 import { Button, Div, H1, H5, Img, Span, Spinner } from "../core/widgets";
 
@@ -128,7 +128,7 @@ export default class Pokedex extends Statefull {
                 this.mountPokemonsDiv();
               },
             },
-            [new FaSolidIcon("arrow-left", { classWidget: "fs-1" })]
+            [FaSolid("arrow-left", { classWidget: "fs-1" })]
           ),
           Span(this.getState("page"), {
             id: "page",
@@ -145,7 +145,7 @@ export default class Pokedex extends Statefull {
                 this.mountPokemonsDiv();
               },
             },
-            [new FaSolidIcon("arrow-right", { classWidget: "fs-1" })]
+            [FaSolid("arrow-right", { classWidget: "fs-1" })]
           ),
         ]),
         Div(

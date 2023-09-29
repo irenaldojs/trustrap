@@ -1,6 +1,6 @@
 import { Statefull, Widget } from "../core/framework";
 import { Button, H1, H5, Span, Div } from "../core/widgets";
-import { FaBrandsIcon, FaSolidIcon } from "../core/fontAwesome/icons";
+import { FaBrands, FaSolid } from "../core/fontAwesome/icons";
 
 export default class Home extends Statefull {
   constructor(root: string) {
@@ -33,13 +33,13 @@ export default class Home extends Statefull {
                   "my-2 d-flex justify-content-center gap-2 fs-1 flex-wrap",
               },
               [
-                new FaBrandsIcon("font-awesome", {
+                FaBrands("font-awesome", {
                   classWidget: "text-primary-emphasis",
                 }),
-                new FaBrandsIcon("bootstrap", { classWidget: "text-purple" }),
-                new FaBrandsIcon("github", { classWidget: "text-dark" }),
-                new FaBrandsIcon("npm", { classWidget: "text-success" }),
-                new FaSolidIcon("graduation-cap", { classWidget: "text-dark" }),
+                FaBrands("bootstrap", { classWidget: "text-purple" }),
+                FaBrands("github", { classWidget: "text-dark" }),
+                FaBrands("npm", { classWidget: "text-success" }),
+                FaSolid("graduation-cap", { classWidget: "text-dark" }),
               ]
             ),
             Div({ classWidget: "mt-3 d-flex justify-content-center gap-2" }, [

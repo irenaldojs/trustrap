@@ -22,7 +22,7 @@ class Icon extends Widget {
     this.classWidget = classIcon + " " + params.classWidget ?? false;
   }
 }
-export class FaBrandsIcon extends Icon {
+class FaBrandsIcon extends Icon {
   constructor(
     iconName: iconBrandsName,
     params?: WidgetType,
@@ -31,7 +31,14 @@ export class FaBrandsIcon extends Icon {
     super({ iconName, iconType: "brands" }, params, children);
   }
 }
-export class FaSolidIcon extends Icon {
+export function FaBrands(
+  iconName: iconBrandsName,
+  params?: WidgetType,
+  children?: ChildrenType
+) {
+  return new FaBrandsIcon(iconName, params, children);
+}
+class FaSolidIcon extends Icon {
   constructor(
     iconName: iconSolidName,
     params?: WidgetType,
@@ -40,7 +47,14 @@ export class FaSolidIcon extends Icon {
     super({ iconName, iconType: "solid" }, params, children);
   }
 }
-export class FaRegularIcon extends Icon {
+export function FaSolid(
+  iconName: iconSolidName,
+  params?: WidgetType,
+  children?: ChildrenType
+) {
+  return new FaSolidIcon(iconName, params, children);
+}
+class FaRegularIcon extends Icon {
   constructor(
     iconName: IconRegularName,
     params?: WidgetType,
@@ -48,4 +62,12 @@ export class FaRegularIcon extends Icon {
   ) {
     super({ iconName, iconType: "regular" }, params, children);
   }
+}
+
+export function FaRegular(
+  iconName: IconRegularName,
+  params?: WidgetType,
+  children?: ChildrenType
+) {
+  return new FaRegularIcon(iconName, params, children);
 }
