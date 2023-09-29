@@ -1,17 +1,14 @@
 import { ChildrenType, Widget, WidgetType } from "./framework";
 
-export class Div extends Widget {
+class DivClass extends Widget {
   constructor(params: WidgetType, children?: ChildrenType) {
     params.tag = "div";
     super(params, children);
   }
 }
-export class FutureBuild extends Widget {
-  futureBuild: Boolean = true;
-  constructor(params: WidgetType, children?: ChildrenType) {
-    params.tag = "div";
-    super(params, children);
-  }
+
+export function Div(params: WidgetType, children?: ChildrenType) {
+  return new DivClass(params, children);
 }
 
 interface HType extends WidgetType {
@@ -30,7 +27,7 @@ class H extends Widget {
     super(params, newChildren);
   }
 }
-export class H1 extends H {
+class H1Class extends H {
   constructor(text: string, params?: WidgetType, children?: ChildrenType) {
     {
       super(
@@ -44,7 +41,10 @@ export class H1 extends H {
     }
   }
 }
-export class H2 extends H {
+export function H1(text: string, params?: WidgetType, children?: ChildrenType) {
+  return new H1Class(text, params, children);
+}
+class H2Class extends H {
   constructor(text: string, params?: WidgetType, children?: ChildrenType) {
     {
       super(
@@ -58,7 +58,10 @@ export class H2 extends H {
     }
   }
 }
-export class H3 extends H {
+export function H2(text: string, params?: WidgetType, children?: ChildrenType) {
+  return new H2Class(text, params, children);
+}
+class H3Class extends H {
   constructor(text: string, params?: WidgetType, children?: ChildrenType) {
     {
       super(
@@ -72,7 +75,10 @@ export class H3 extends H {
     }
   }
 }
-export class H4 extends H {
+export function H3(text: string, params?: WidgetType, children?: ChildrenType) {
+  return new H3Class(text, params, children);
+}
+class H4Class extends H {
   constructor(text: string, params?: WidgetType, children?: ChildrenType) {
     {
       super(
@@ -86,7 +92,10 @@ export class H4 extends H {
     }
   }
 }
-export class H5 extends H {
+export function H4(text: string, params?: WidgetType, children?: ChildrenType) {
+  return new H4Class(text, params, children);
+}
+class H5Class extends H {
   constructor(text: string, params?: WidgetType, children?: ChildrenType) {
     {
       super(
@@ -100,7 +109,11 @@ export class H5 extends H {
     }
   }
 }
-export class H6 extends H {
+export function H5(text: string, params?: WidgetType, children?: ChildrenType) {
+  return new H5Class(text, params, children);
+}
+
+class H6Class extends H {
   constructor(text: string, params?: WidgetType, children?: ChildrenType) {
     {
       super(
@@ -114,7 +127,10 @@ export class H6 extends H {
     }
   }
 }
-export class P extends H {
+export function H6(text: string, params?: WidgetType, children?: ChildrenType) {
+  return new H6Class(text, params, children);
+}
+class PClass extends H {
   constructor(text: string, params?: WidgetType, children?: ChildrenType) {
     {
       super(
@@ -128,7 +144,10 @@ export class P extends H {
     }
   }
 }
-export class Span extends H {
+export function P(text: string, params?: WidgetType, children?: ChildrenType) {
+  return new PClass(text, params, children);
+}
+class SpanClass extends H {
   constructor(text: string, params?: WidgetType, children?: ChildrenType) {
     {
       super(
@@ -141,6 +160,13 @@ export class Span extends H {
       );
     }
   }
+}
+export function Span(
+  text: string,
+  params?: WidgetType,
+  children?: ChildrenType
+) {
+  return new SpanClass(text, params, children);
 }
 interface ButtonType {
   variant?:
@@ -155,7 +181,7 @@ interface ButtonType {
   outline?: boolean;
   size?: "sm" | "md" | "lg";
 }
-export class Button extends Widget {
+class ButtonClass extends Widget {
   variant?: string;
   constructor(
     { variant, outline, size }: ButtonType,
@@ -178,7 +204,14 @@ export class Button extends Widget {
     this.classWidget = classWidgetFinal;
   }
 }
-export class Img extends Widget {
+export function Button(
+  { variant, outline, size }: ButtonType,
+  params: WidgetType,
+  children?: ChildrenType
+) {
+  return new ButtonClass({ variant, outline, size }, params, children);
+}
+class ImgClass extends Widget {
   constructor(src: string, params?: WidgetType, children?: ChildrenType) {
     params = params ?? {};
     params.tag = "img";
@@ -186,18 +219,25 @@ export class Img extends Widget {
     super(params, children);
   }
 }
+export function Img(src: string, params?: WidgetType, children?: ChildrenType) {
+  return new ImgClass(src, params, children);
+}
 
-export class Spinner extends Widget {
+class SpinnerClass extends Widget {
   constructor(params?: WidgetType) {
     params = params ?? {};
     params.classWidget = params.classWidget + " spinner-border";
     params.tag = "div";
 
     super(params, [
-      new Span("Loading...", {
+      Span("Loading...", {
         classWidget: "visually-hidden",
         role: "status",
       }),
     ]);
   }
+}
+
+export function Spinner(params?: WidgetType) {
+  return new SpinnerClass(params);
 }

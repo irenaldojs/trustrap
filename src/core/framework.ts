@@ -120,12 +120,12 @@ export abstract class Statefull {
     if (!this.rootElement) throw new Error("Root element not found");
 
     this.mountState();
-    this.virtualDom = this.mountTree();
+    this.virtualDom = this.render();
     this.renderDom();
     this.mountFutureBuild();
   }
 
-  abstract mountTree(): Widget;
+  abstract render(): Widget;
   mountState(): void {}
   mountFutureBuild(): void {}
 
@@ -208,7 +208,7 @@ export abstract class Statefull {
    * @param {string} nameState - The name of the state to update.
    */
   updateVirtualDom(nameState: string) {
-    var newVirtualDom = this.mountTree();
+    var newVirtualDom = this.render();
 
     let list: Widget[] = [];
     const pushList = (newWidget: Widget) => {
@@ -252,9 +252,9 @@ export abstract class Statefull {
   }
 }
 
-type RouterType = {
+export type RouterType = {
   [key: string]: {
-    render: any;
+    page: any;
     root: string;
   };
 };
@@ -277,8 +277,8 @@ export class TruStrap {
       }
     });
     if (instantiate) {
-      const { render, root } = this.routes[path];
-      const instance = new render(root);
+      const { page, root } = this.routes[path];
+      const instance: Statefull = new page(root);
       if (instance && instance instanceof Statefull) {
         instance.app = this;
         instance.router = path;

@@ -1,5 +1,5 @@
 import { FaSolidIcon } from "../core/fontAwesome/icons";
-import { Statefull, TruStrap, Widget } from "../core/framework";
+import { Statefull, Widget } from "../core/framework";
 import { Button, Div, H1, H5, Img, Span, Spinner } from "../core/widgets";
 
 type PokemonBaseType = {
@@ -58,7 +58,7 @@ export default class Pokedex extends Statefull {
   }
   mountState(): void {
     this.createState("page", 1);
-    this.createState("pokemons", [new Spinner()]);
+    this.createState("pokemons", [Spinner()]);
     this.createState("maxPage", 14);
     this.mountPokemonsDiv();
   }
@@ -70,31 +70,31 @@ export default class Pokedex extends Statefull {
     );
     let children: Widget[] = [];
     await this.data.forEach((pokemon: PokemonDataType) => {
-      const div = new Div(
+      const div = Div(
         {
           classWidget: `d-flex flex-column align-items-center justify-content-between 
             bg-light card-pokemon div-pokemon rounded border border-3 border-dark`,
         },
         [
-          new Div(
+          Div(
             { classWidget: "bg-pokemon w-100 d-flex justify-content-center" },
             [
-              new Img(pokemon.sprite, {
+              Img(pokemon.sprite, {
                 classWidget: "img-pokemon img-fluid",
               }),
             ]
           ),
-          new Div({ classWidget: "w-100 text-center" }, [
-            new H5(pokemon.id + " - " + pokemon.name, {
+          Div({ classWidget: "w-100 text-center" }, [
+            H5(pokemon.id + " - " + pokemon.name, {
               classWidget: "bg-dark text-light text-capitalize py-1",
             }),
-            new Div(
+            Div(
               {
                 classWidget:
                   "w-100 d-flex justify-content-center gap-2 text-uppercase",
               },
               pokemon.types.map((type: string) => {
-                return new Span(type, {
+                return Span(type, {
                   classWidget: "py-1 px-2 mb-1 rounded types " + type,
                 });
               })
@@ -110,15 +110,15 @@ export default class Pokedex extends Statefull {
     }
   }
 
-  mountTree(): Widget {
-    return new Div(
+  render(): Widget {
+    return Div(
       {
         classWidget: "v-100 w-100 p-4 bg-danger",
       },
       [
-        new H1("Pokedex", { classWidget: "text-light text-center" }),
-        new Div({ classWidget: "d-flex justify-content-center gap-3 mb-2" }, [
-          new Button(
+        H1("Pokedex", { classWidget: "text-light text-center" }),
+        Div({ classWidget: "d-flex justify-content-center gap-3 mb-2" }, [
+          Button(
             { variant: "success" },
             {
               onClick: () => {
@@ -130,12 +130,12 @@ export default class Pokedex extends Statefull {
             },
             [new FaSolidIcon("arrow-left", { classWidget: "fs-1" })]
           ),
-          new Span(this.getState("page"), {
+          Span(this.getState("page"), {
             id: "page",
             observers: ["page"],
             classWidget: "px-5 bg-light fs-1 rounded",
           }),
-          new Button(
+          Button(
             { variant: "success" },
             {
               onClick: () => {
@@ -148,7 +148,7 @@ export default class Pokedex extends Statefull {
             [new FaSolidIcon("arrow-right", { classWidget: "fs-1" })]
           ),
         ]),
-        new Div(
+        Div(
           {
             id: "pokedex",
             observers: ["pokemons", "page"],
