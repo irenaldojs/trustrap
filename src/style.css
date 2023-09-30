@@ -19,20 +19,20 @@
   color: purple
 }
 
-.div-pokemon {
-  width: 200px;
+.bg-data{
+  background-color: #0D1C6D;
 }
 
 .img-pokemon {
-  height: 200px;
+  height: 200px;  
 }
 
 .bg-pokemon {
   background-image: url("./background.jpg");
-  background-size: cover ;
   background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover ;
 }
-
 
 .card-pokemon:hover {
   cursor: pointer;
@@ -41,6 +41,10 @@
 .card-pokemon img{
   padding: 25px 25px;
   transition: 200ms;
+}
+
+.bg-pokedex{
+  min-height: 100vh;
 }
 
 .card-pokemon:hover img {

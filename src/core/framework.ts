@@ -250,6 +250,17 @@ export abstract class Statefull {
   navigation(path: string) {
     this.app?.navigation(path);
   }
+
+  getParams(): any {
+    return this.app?.getParams();
+  }
+  getParam(name: string): string | null {
+    const params = this.app?.getParams();
+    if (params && params[name]) {
+      return params[name];
+    }
+    return null;
+  }
 }
 
 export type RouterType = {
@@ -259,16 +270,22 @@ export type RouterType = {
   };
 };
 
-export class TruStrap {
+class TruStrap {
   routes: RouterType;
   instances: Statefull[] = [];
 
   constructor(routes: RouterType) {
     this.routes = routes;
-    this.navigation("/");
+    this.navigation();
   }
-  navigation(path: string) {
+  navigation(path?: string) {
     let instantiate = true;
+
+    if (path && path !== this.getRoute()) {
+      this.changeRoute(path);
+    } else if (!path) {
+      path = this.getRoute();
+    }
 
     this.instances.forEach((instance) => {
       if (instance.router == path) {
@@ -287,8 +304,47 @@ export class TruStrap {
       }
     }
   }
-}
 
+  getRoute(): string {
+    const params = this.getAllParams();
+    const route = params["route"] ?? "/";
+    if (route[0] !== "/") {
+      return "/" + route;
+    }
+    return route;
+  }
+
+  getParams(): any {
+    const newParams = this.getAllParams();
+    delete newParams["route"];
+    return newParams;
+  }
+
+  getAllParams(): any {
+    const paramsBase = window.location.search.split("?");
+    if (paramsBase.length < 2) return {};
+    const paramsRoute = paramsBase[1].split("&");
+    let params: any = {};
+    paramsRoute.forEach((param) => {
+      const [name, value] = param.split("=");
+      if (typeof name === "string" && value) {
+        const Note = { [name]: value };
+        params = { ...params, ...Note };
+      }
+    });
+    return params;
+  }
+
+  changeRoute(path: string) {
+    const baseURL = window.location.origin;
+    if (path !== "/") {
+      const newUrl = baseURL + "?route=" + path;
+      window.history.pushState({}, "", newUrl);
+    } else {
+      window.history.pushState({}, "", "/");
+    }
+  }
+}
 export function createTruStrap(routes: RouterType) {
   return new TruStrap(routes);
 }

@@ -241,3 +241,42 @@ class SpinnerClass extends Widget {
 export function Spinner(params?: WidgetType) {
   return new SpinnerClass(params);
 }
+
+interface InputType {
+  type?:
+    | "text"
+    | "email"
+    | "password"
+    | "number"
+    | "datetime"
+    | "date"
+    | "time"
+    | "month"
+    | "week"
+    | "url"
+    | "tel"
+    | "color"
+    | "range"
+    | "search"
+    | "file";
+  disabled?: boolean;
+  form?: string;
+  inputmode?: "url" | "email" | "numeric" | "decimal" | "search" | "tel";
+  placeholder?: string;
+  maxlength?: number;
+  min?: number;
+  max?: number;
+  readonly?: boolean;
+  required?: boolean;
+  onChange?: Function;
+}
+
+export function Input(inputParams: InputType, params?: WidgetType) {
+  params = params ?? {};
+  params.tag = "input";
+  const widget = new Widget(params);
+  inputParams.type
+    ? widget.element?.setAttribute("type", inputParams.type)
+    : false;
+  return widget;
+}

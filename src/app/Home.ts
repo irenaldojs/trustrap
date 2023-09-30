@@ -1,5 +1,5 @@
 import { Statefull, Widget } from "../core/framework";
-import { Button, H1, H5, Span, Div } from "../core/widgets";
+import { Button, H1, Span, Div } from "../core/widgets";
 import { FaBrands, FaSolid } from "../core/fontAwesome/icons";
 
 export default class Home extends Statefull {
@@ -22,11 +22,10 @@ export default class Home extends Statefull {
           {
             name: "home",
             classWidget:
-              "col-12 col-sm-8 col-md-6 text-center border border-dark rounded p-5 bg-light",
+              "col-12 col-sm-8 col-md-6 text-center border border-dark rounded p-5 bg-light d-flex flex-column gap-3",
           },
           [
-            H1("Ola mundo!", { classWidget: "mb-2" }),
-            Div({}, [H5("Teste da framework", { classWidget: "mb-3" })]),
+            H1("TruStrap", { classWidget: "mb-2 fw-bold" }),
             Div(
               {
                 classWidget:
@@ -47,7 +46,7 @@ export default class Home extends Statefull {
                 {
                   variant: "success",
                   outline: true,
-                  size: "sm",
+                  size: "lg",
                 },
                 {
                   onClick: () =>
@@ -64,18 +63,18 @@ export default class Home extends Statefull {
               Button(
                 {
                   variant: "primary",
-                  size: "sm",
+                  size: "lg",
                 },
-                { onClick: () => this.navigation("/dashboard") },
-                ["Rota do Dashboard"]
+                { onClick: () => this.navigation("/novaRota") },
+                ["Nova Rota"]
               ),
               Button(
                 {
                   variant: "primary",
-                  size: "sm",
+                  size: "lg",
                 },
                 { onClick: () => this.navigation("/pokedex") },
-                ["Rota do Pokedex"]
+                ["Pokedex"]
               ),
             ]),
           ]

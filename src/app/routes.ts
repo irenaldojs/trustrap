@@ -1,5 +1,5 @@
 import Home from "./Home";
-import Dashboard from "./Dashboard";
+import NovaRota from "./NovaRota";
 import Pokedex from "./Pokedex";
 
-export { Home, Dashboard, Pokedex };
+export { Home, NovaRota, Pokedex };

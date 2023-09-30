@@ -1,6 +1,6 @@
 import { FaSolid } from "../core/fontAwesome/icons";
 import { Statefull, Widget } from "../core/framework";
-import { Button, Div, H1, H5, Img, Span, Spinner } from "../core/widgets";
+import { Button, Div, H1, H4, Img, Span, Spinner } from "../core/widgets";
 
 type PokemonBaseType = {
   name: string;
@@ -19,7 +19,7 @@ async function fetchPokemons(
   offset: number
 ): Promise<PokemonDataType[]> {
   const offsetUrl = offset ?? 0;
-  const maxUrl = max ?? 20;
+  const maxUrl = max ?? 10;
   const url =
     "https://pokeapi.co/api/v2/pokemon" +
       "?offset=" +
@@ -59,7 +59,7 @@ export default class Pokedex extends Statefull {
   mountState(): void {
     this.createState("page", 1);
     this.createState("pokemons", [Spinner()]);
-    this.createState("maxPage", 14);
+    this.createState("maxPage", 10);
     this.mountPokemonsDiv();
   }
 
@@ -73,7 +73,7 @@ export default class Pokedex extends Statefull {
       const div = Div(
         {
           classWidget: `d-flex flex-column align-items-center justify-content-between 
-            bg-light card-pokemon div-pokemon rounded border border-3 border-dark`,
+            card-pokemon col-12 col-sm-4 col-md-3 col-lg-2 rounded border border-3 border-dark`,
         },
         [
           Div(
@@ -84,9 +84,10 @@ export default class Pokedex extends Statefull {
               }),
             ]
           ),
-          Div({ classWidget: "w-100 text-center" }, [
-            H5(pokemon.id + " - " + pokemon.name, {
-              classWidget: "bg-dark text-light text-capitalize py-1",
+          Div({ classWidget: "bg-data w-100 text-light" }, [
+            Span(formatId(pokemon.id), { classWidget: "text-start ps-2 fs-6" }),
+            H4(pokemon.name, {
+              classWidget: "text-center text-capitalize ps-2 fw-bold",
             }),
             Div(
               {
@@ -113,11 +114,32 @@ export default class Pokedex extends Statefull {
   render(): Widget {
     return Div(
       {
-        classWidget: "v-100 w-100 p-4 bg-danger",
+        classWidget: "v-100 w-100 p-4 bg-danger bg-pokedex",
       },
       [
-        H1("Pokedex", { classWidget: "text-light text-center" }),
-        Div({ classWidget: "d-flex justify-content-center gap-3 mb-2" }, [
+        Div({}, [
+          Button(
+            { variant: "success" },
+            {
+              classWidget:
+                "d-flex justify-content-center align-items-center gap-1",
+              onClick: () => this.navigation("/"),
+            },
+            [FaSolid("arrow-left"), "Voltar"]
+          ),
+          H1("POKEDEX", { classWidget: "text-light text-center" }),
+        ]),
+        Div(
+          {
+            id: "pokedex",
+            observers: ["pokemons", "page"],
+            promise: true,
+            classWidget:
+              "bg-light rounded border border-3 border-dark p-1 d-flex flex-wrap justify-content-center gap-1",
+          },
+          this.getState("pokemons")
+        ),
+        Div({ classWidget: "d-flex justify-content-center gap-3 mt-2" }, [
           Button(
             { variant: "success" },
             {
@@ -148,17 +170,11 @@ export default class Pokedex extends Statefull {
             [FaSolid("arrow-right", { classWidget: "fs-1" })]
           ),
         ]),
-        Div(
-          {
-            id: "pokedex",
-            observers: ["pokemons", "page"],
-            promise: true,
-            classWidget:
-              "bg-light rounded border border-3 border-dark py-4 d-flex flex-wrap justify-content-center gap-3",
-          },
-          this.getState("pokemons")
-        ),
       ]
     );
   }
+}
+
+function formatId(id: number) {
+  return "# " + id.toString().padStart(4, "0");
 }
