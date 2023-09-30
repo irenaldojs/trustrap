@@ -1,5 +1,5 @@
 import { Statefull, Widget } from "../core/framework";
-import { Button, H1, Span, Div } from "../core/widgets";
+import { Button, H1, Span, Div, Img } from "../core/widgets";
 import { FaBrands, FaSolid } from "../core/fontAwesome/icons";
 
 export default class Home extends Statefull {
@@ -15,37 +15,53 @@ export default class Home extends Statefull {
     return Div(
       {
         classWidget:
-          "vh-100 d-flex justify-content-center align-items-center bg-secondary px-2 px-sm-0",
+          "vh-100 d-flex justify-content-center align-items-center bg-home px-2 px-sm-0 rounded",
       },
       [
         Div(
           {
             name: "home",
             classWidget:
-              "col-12 col-sm-8 col-md-6 text-center border border-dark rounded p-5 bg-light d-flex flex-column gap-3",
+              "col-12 col-sm-8 col-md-6 text-center border border-dark rounded-4     p-5 card-home d-flex flex-column gap-3",
           },
           [
-            H1("TruStrap", { classWidget: "mb-2 fw-bold" }),
+            Div({ classWidget: "d-flex justify-content-center gap-2" }, [
+              H1("TruStrap", {
+                classWidget: "mb-2 fw-bold text-light fst-italic",
+              }),
+              FaSolid("graduation-cap", {
+                classWidget:
+                  "text-dark fs-1 rounded-5 p-1 text-center bg-light lh-1 ",
+              }),
+            ]),
             Div(
               {
                 classWidget:
-                  "my-2 d-flex justify-content-center gap-2 fs-1 flex-wrap",
+                  "my-2 fs-1 p-1 d-flex justify-content-center gap-3 ",
               },
               [
                 FaBrands("font-awesome", {
-                  classWidget: "text-primary-emphasis",
+                  classWidget:
+                    "text-primary-emphasis bg-light rounded p-1 icon-home",
                 }),
-                FaBrands("bootstrap", { classWidget: "text-purple" }),
-                FaBrands("github", { classWidget: "text-dark" }),
-                FaBrands("npm", { classWidget: "text-success" }),
-                FaSolid("graduation-cap", { classWidget: "text-dark" }),
+                FaBrands("bootstrap", {
+                  classWidget: "text-purple bg-light rounded p-1 icon-home",
+                }),
+                FaBrands("github", {
+                  classWidget: "text-dark bg-light rounded p-1 icon-home",
+                }),
+                FaBrands("npm", {
+                  classWidget: "text-success bg-light rounded p-1 icon-home",
+                }),
+                Img("Typescript_logo.svg", {
+                  classWidget: "icon-home bg-light rounded p-1",
+                }),
               ]
             ),
             Div({ classWidget: "mt-3 d-flex justify-content-center gap-2" }, [
               Button(
                 {
                   variant: "success",
-                  outline: true,
                   size: "lg",
                 },
                 {

@@ -68,6 +68,9 @@ export default class Pokedex extends Statefull {
       this.getState("maxPage"),
       (this.getState("page") - 1) * this.getState("maxPage")
     );
+    await this.data.sort((a: PokemonDataType, b: PokemonDataType) =>
+      a.id > b.id ? 1 : -1
+    );
     let children: Widget[] = [];
     await this.data.forEach((pokemon: PokemonDataType) => {
       const div = Div(

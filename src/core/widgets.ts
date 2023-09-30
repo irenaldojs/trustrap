@@ -280,3 +280,10 @@ export function Input(inputParams: InputType, params?: WidgetType) {
     : false;
   return widget;
 }
+
+export function SVG(svg: string, params?: WidgetType) {
+  params = params ?? {};
+  params.tag = "svg";
+  params.src = svg;
+  return new Widget(params);
+}

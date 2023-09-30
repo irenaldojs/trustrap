@@ -1,24 +1,21 @@
 # TruStrap
 
 **Tecnologias Utilizadas:**
+
 - TypeScript
 - Vite
 - Bootstrap
 - FontAwesome
-<img src="https://github.com/irenaldojs/trustrap/blob/atual/public/tela_trustrap.png" />
-
-
-  
+  <img src="https://github.com/irenaldojs/trustrap/blob/atual/public/tela_trustrap.png" />
 - [# Link para o Deploy <-- ](https://trustrap.netlify.app/) - Veja a versão ao vivo do projeto em ação!
-
 
 **Instalacao**
 
 Para começar, utilize o Vite como base. Basta copiar o projeto e executar os seguintes comandos no terminal:
+
 - npm i - Isso irá instalar as dependências do projeto.
 - npm run dev - Isso iniciará o servidor de desenvolvimento.
-Siga esses passos simples para configurar o ambiente e começar a trabalhar com o projeto.
-
+  Siga esses passos simples para configurar o ambiente e começar a trabalhar com o projeto.
 
 **Introdução:**
 
@@ -42,7 +39,7 @@ Semelhante ao Flutter, criei uma classe raiz para converter variáveis em elemen
 Adaptei o pacote de ícones FontAwesome em um pacote próprio para agilizar a montagem de ícones.
 
 **6. Render:**
-Com base no que ouvi falar sobre como o React monta o HTML, fiz mais ou menos do jeito que imagino que aconteça por baixo dos panos. Na minha classe, tem uma virtual DOM onde eu monto através do `mountTree()`. Sempre que quero mostrar o resultado da virtual DOM na tela, invoco a função `renderDom()`.
+Com base no que ouvi falar sobre como o React monta o HTML, fiz mais ou menos do jeito que imagino que aconteça por baixo dos panos. Na minha classe, tem uma virtual DOM onde eu monto através do `render()`. Sempre que quero mostrar o resultado da virtual DOM na tela, invoco a função `renderDom()`.
 
 **7. Atualizando a Página:**
 Usando o padrão comum, `createState()` cria um estado, `setState()` altera o estado e `getState()` traz o valor atual do estado. Sempre que chamamos a função `setState()`, iniciamos o próximo passo para atualizar a página.
