@@ -1,6 +1,12 @@
-import { Statefull, Widget } from "../core/framework";
-import { Button, H1, Span, Div, Img } from "../core/widgets";
-import { FaBrands, FaSolid } from "../core/fontAwesome/icons";
+import { Statefull } from "../core/statefull_core";
+import { Widget } from "../core/widgets/widgets";
+import { _div } from "../core/widgets/basic/div";
+import { _h1 } from "../core/widgets/basic/headText";
+import { _button } from "../core/widgets/basic/button";
+import { _bsButton } from "../core/widgets/boostrap/button";
+import { _span } from "../core/widgets/basic/span";
+import { _img } from "../core/widgets/basic/image";
+import { _faBrands, _faSolid } from "../core/widgets/fontAwesome/icons";
 
 export default class Home extends Statefull {
   constructor(root: string) {
@@ -12,87 +18,86 @@ export default class Home extends Statefull {
   }
 
   render(): Widget {
-    return Div(
+    return _div(
       {
-        classWidget:
+        class:
           "vh-100 d-flex justify-content-center align-items-center bg-home px-2 px-sm-0 rounded",
       },
       [
-        Div(
+        _div(
           {
             name: "home",
-            classWidget:
-              "col-12 col-sm-8 col-md-6 text-center border border-dark rounded-4     p-5 card-home d-flex flex-column gap-3",
+            class:
+              "col-12 col-sm-8 col-md-4 text-center border border-dark rounded-4 p-5 card-home d-flex flex-column gap-3",
           },
           [
-            Div({ classWidget: "d-flex justify-content-center gap-2" }, [
-              H1("TruStrap", {
-                classWidget: "mb-2 fw-bold text-light fst-italic",
+            _div({ class: "d-flex justify-content-center gap-2" }, [
+              _h1("TruStrap", {
+                class: "mb-2 fw-bold text-light fst-italic",
               }),
-              FaSolid("graduation-cap", {
-                classWidget:
+              _faSolid("graduation-cap", {
+                class:
                   "text-dark fs-1 rounded-5 p-1 text-center bg-light lh-1 ",
               }),
             ]),
-            Div(
+            _div(
               {
-                classWidget:
-                  "my-2 fs-1 p-1 d-flex justify-content-center gap-3 ",
+                class:
+                  "my-2 fs-1 p-1 d-flex justify-content-center gap-3 flex-wrap",
               },
               [
-                FaBrands("font-awesome", {
-                  classWidget:
-                    "text-primary-emphasis bg-light rounded p-1 icon-home",
+                _img("vitejs.svg", {
+                  class: "icon-home bg-light rounded p-1",
                 }),
-                FaBrands("bootstrap", {
-                  classWidget: "text-purple bg-light rounded p-1 icon-home",
+                _img("typescript.svg", {
+                  class: "icon-home bg-light rounded p-1",
                 }),
-                FaBrands("github", {
-                  classWidget: "text-dark bg-light rounded p-1 icon-home",
+                _faBrands("font-awesome", {
+                  class: "text-primary-emphasis bg-light rounded p-1 icon-home",
                 }),
-                FaBrands("npm", {
-                  classWidget: "text-success bg-light rounded p-1 icon-home",
-                }),
-                Img("Typescript_logo.svg", {
-                  classWidget: "icon-home bg-light rounded p-1",
+                _faBrands("bootstrap", {
+                  class: "text-purple bg-light rounded p-1 icon-home",
                 }),
               ]
             ),
-            Div({ classWidget: "mt-3 d-flex justify-content-center gap-2" }, [
-              Button(
-                {
-                  variant: "success",
-                  size: "lg",
-                },
-                {
-                  onClick: () =>
-                    this.setState("count", this.getState("count") + 1),
-                },
-                [
-                  Span("Contagem " + this.getState("count"), {
-                    id: "contador",
-                    observers: ["count"],
-                    classWidget: "px-2",
-                  }),
-                ]
-              ),
-              Button(
-                {
-                  variant: "primary",
-                  size: "lg",
-                },
-                { onClick: () => this.navigation("/novaRota") },
-                ["Nova Rota"]
-              ),
-              Button(
-                {
-                  variant: "primary",
-                  size: "lg",
-                },
-                { onClick: () => this.navigation("/pokedex") },
-                ["Pokedex"]
-              ),
-            ]),
+            _div(
+              {
+                class: "mt-3 d-flex justify-content-center gap-2 flex-wrap",
+              },
+              [
+                _bsButton(
+                  {
+                    variant: "warning",
+                    click: () => {
+                      this.setState("count", this.getState("count") + 1);
+                    },
+                  },
+                  [
+                    _span("Contagem " + this.getState("count"), {
+                      id: "countButton",
+                      observers: ["count"],
+                      class: "px-2",
+                    }),
+                  ]
+                ),
+                _bsButton(
+                  {
+                    variant: "primary",
+                    size: "lg",
+                    click: () => this.navigation("/novaRota"),
+                  },
+                  ["Nova Rota"]
+                ),
+                _bsButton(
+                  {
+                    variant: "primary",
+                    size: "lg",
+                    click: () => this.navigation("/pokedex"),
+                  },
+                  ["Pokedex"]
+                ),
+              ]
+            ),
           ]
         ),
       ]

@@ -1,4 +1,4 @@
-import { ChildrenType, Widget, WidgetType } from "./framework";
+import { ChildrenType, Widget, WidgetType } from "./widgets";
 
 class DivClass extends Widget {
   constructor(params: WidgetType, children?: ChildrenType) {
@@ -177,7 +177,16 @@ interface ButtonType {
     | "warning"
     | "info"
     | "light"
-    | "dark";
+    | "dark"
+    | "outlineprimary"
+    | "outlinesecondary"
+    | "outlinesuccess"
+    | "outlinedanger"
+    | "outlinewarning"
+    | "outlineinfo"
+    | "outlinelight"
+    | "outlinedark";
+
   outline?: boolean;
   size?: "sm" | "md" | "lg";
 }

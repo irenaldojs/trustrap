@@ -1,107 +1,5 @@
-export type WidgetType = {
-  id?: string;
-  name?: string;
-  classWidget?: string;
-  src?: string;
-  tag?: string;
-  observers?: string[];
-  promise?: boolean;
-  onClick?: Function;
-  role?: "button" | "status" | undefined;
-};
-export type ChildrenType = (Widget | string | number)[];
+import { Widget } from "./widgets/widgets";
 
-export class Widget {
-  id: string;
-  name?: string;
-  classWidget?: string;
-  tag?: string;
-  src?: string;
-  children?: (Widget | string | number)[];
-  parent?: Element;
-  element?: HTMLElement;
-  observers: string[] = [];
-  onClick?: Function;
-  promise?: boolean;
-  role?: "button" | "status" | undefined;
-  constructor(
-    {
-      id,
-      name,
-      classWidget,
-      tag,
-      onClick,
-      observers,
-      src,
-      promise,
-      role,
-    }: WidgetType,
-    children?: ChildrenType
-  ) {
-    observers ? (this.observers = observers) : false;
-    this.id = id ?? generateId();
-    name ? (this.name = name) : false;
-    classWidget ? (this.classWidget = classWidget) : false;
-    this.tag = tag;
-    this.children = children;
-    this.onClick = onClick;
-    this.src = src;
-    this.promise = promise;
-    this.role = role;
-  }
-  /**
-   * Creates an element and appends it to the parent widget.
-   *
-   * @param {Element} parentElement - The parent element to append the element to.
-   * @throws {Error} If the element is null.
-   */
-  renderElement(parent: Element, oldElement?: Element): Element {
-    this.element = document.createElement(this.tag ?? "div");
-
-    if (this.element) {
-      this.configElement();
-
-      if (oldElement) {
-        parent?.replaceChild(this.element, oldElement);
-      } else if (parent) {
-        parent.append(this.element);
-        this.parent = parent;
-      }
-
-      if (this.children && this.element) {
-        this.children.forEach((child) => {
-          if (child instanceof Widget) {
-            child.renderElement(this.element!);
-          } else {
-            this.element?.append(child.toString());
-          }
-        });
-      }
-    } else {
-      throw new Error("Element is null");
-    }
-    return this.element;
-  }
-  /**
-   * Updates the element of the widget with the provided widget.
-   *
-   * @param {Widget} widget - The widget used to update the element.
-   * @return {void} This function does not return a value.
-   */
-  configElement() {
-    if (!this.element) return;
-
-    this.element.id = this.id;
-    if (this.classWidget != undefined)
-      this.element.className = this.classWidget;
-    this.name ? this.element.setAttribute("name", this.name) : false;
-    this.src ? this.element.setAttribute("src", this.src) : false;
-    this.role ? this.element.setAttribute("role", this.role) : false;
-    this.element.onclick = () => {
-      if (this.onClick) this.onClick();
-    };
-  }
-}
 type StateType = {
   [key: string]: any;
 };
@@ -143,28 +41,9 @@ export abstract class Statefull {
 
     if (parent) {
       parent.innerHTML = "";
-      this.virtualDom?.renderElement(parent);
+      this.virtualDom?.renderElement(parent, 0);
     }
   }
-  /**
-   * Recursively renders the tree of widgets starting from the given widget.
-   *
-   * @param {Widget} widget - The root widget from which to start rendering.
-   * @return {void} This function does not return a value.
-   */
-  renterTree(widget: Widget): void {
-    widget.children?.forEach((child) => {
-      if (child instanceof Widget) {
-        if (widget.element) {
-          child.renderElement(widget.element);
-        }
-        this.renterTree(child);
-      } else {
-        widget.element?.append(child.toString());
-      }
-    });
-  }
-
   /**
    * Creates a new state with the given name and value.
    *
@@ -209,19 +88,21 @@ export abstract class Statefull {
    */
   updateVirtualDom(nameState: string) {
     var newVirtualDom = this.render();
+    let list: Array<Widget> = [];
 
-    let list: Widget[] = [];
     const pushList = (newWidget: Widget) => {
       list.push(newWidget);
     };
 
     this.updateTreeState(newVirtualDom, nameState, pushList);
 
-    list.forEach((widget) => {
-      const oldElement = document.getElementById(widget.id);
-      const parentElement = oldElement?.parentElement;
-      if (oldElement && parentElement) {
-        widget.renderElement(parentElement, oldElement);
+    list.forEach((item, index) => {
+      if (item.params.id) {
+        const oldElement = document.getElementById(item.params.id);
+        const parentElement = oldElement?.parentElement;
+        if (oldElement && parentElement) {
+          item.renderElement(parentElement, index, oldElement);
+        }
       }
     });
 
@@ -237,11 +118,13 @@ export abstract class Statefull {
   updateTreeState(widget: Widget, nameState: string, pushList: Function) {
     widget.children?.forEach((child) => {
       if (child instanceof Widget) {
-        child.observers.forEach((observer) => {
-          if (observer == nameState) {
-            pushList(child);
-          }
-        });
+        if (child.params.observers) {
+          child.params?.observers.forEach((observer) => {
+            if (observer == nameState) {
+              pushList(child);
+            }
+          });
+        }
         this.updateTreeState(child, nameState, pushList);
       }
     });

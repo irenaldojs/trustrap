@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./style.css";
-import { RouterType, createTruStrap } from "./core/framework";
+import { RouterType, createTruStrap } from "./core/statefull_core";
 import { Home, NovaRota, Pokedex } from "./app/routes";
 
 ("Instance App");

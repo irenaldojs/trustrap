@@ -1,6 +1,7 @@
 import { FaSolid } from "../core/fontAwesome/icons";
-import { Statefull, Widget } from "../core/framework";
-import { Button, Div, H3 } from "../core/widgets";
+import { Statefull } from "../core/statefull_core";
+import { Widget } from "../core/widgets/widgets";
+import { Button, Div, H3 } from "../core/widgets/widgets_xx";
 
 export default class Dashboard extends Statefull {
   constructor(root: string) {

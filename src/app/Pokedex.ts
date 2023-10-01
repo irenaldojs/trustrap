@@ -1,6 +1,15 @@
 import { FaSolid } from "../core/fontAwesome/icons";
-import { Statefull, Widget } from "../core/framework";
-import { Button, Div, H1, H4, Img, Span, Spinner } from "../core/widgets";
+import { Statefull } from "../core/statefull_core";
+import { Widget } from "../core/widgets/widgets";
+import {
+  Button,
+  Div,
+  H1,
+  H4,
+  Img,
+  Span,
+  Spinner,
+} from "../core/widgets/widgets_xx";
 
 type PokemonBaseType = {
   name: string;
@@ -115,6 +124,7 @@ export default class Pokedex extends Statefull {
   }
 
   render(): Widget {
+    const maxPages = Math.floor(649 / this.getState("maxPage")) + 1;
     return Div(
       {
         classWidget: "v-100 w-100 p-4 bg-danger bg-pokedex",
@@ -155,16 +165,16 @@ export default class Pokedex extends Statefull {
             },
             [FaSolid("arrow-left", { classWidget: "fs-1" })]
           ),
-          Span(this.getState("page"), {
+          Span(this.getState("page") + "/" + maxPages, {
             id: "page",
             observers: ["page"],
-            classWidget: "px-5 bg-light fs-1 rounded",
+            classWidget: "px-2 bg-light fs-1 rounded",
           }),
           Button(
             { variant: "success" },
             {
               onClick: () => {
-                if (this.getState("page") < 800) {
+                if (this.getState("page") < maxPages) {
                   this.setState("page", this.getState("page") + 1);
                 }
                 this.mountPokemonsDiv();

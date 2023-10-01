@@ -1,4 +1,4 @@
-import { ChildrenType, Widget, WidgetType } from "../framework";
+import { ChildrenType, Widget, WidgetType } from "../widgets/widgets";
 import { IconStyle } from "./types/IconStyle";
 import iconBrandsName from "./types/iconBrandsName";
 import IconRegularName from "./types/iconRegularName";
