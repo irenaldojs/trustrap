@@ -1,5 +1,5 @@
-import { Widget } from "../widgets";
-import { ChildrenType, WidgetType } from "../widgetsType";
+import { Widget } from "..";
+import { ChildrenType, WidgetType } from "../types/index.ts";
 
 export function _button(params?: WidgetType, children?: ChildrenType) {
   params = {

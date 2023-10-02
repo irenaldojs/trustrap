@@ -1,5 +1,5 @@
-import { Widget } from "../widgets";
-import { ChildrenType, WidgetType } from "../widgetsType";
+import { Widget } from "..";
+import { ChildrenType, WidgetType } from "../types/index.ts";
 
 type BsButtonType = WidgetType & {
   variant?:
@@ -27,7 +27,7 @@ export function _bsButton(params?: BsButtonType, children?: ChildrenType) {
   const variant = params?.variant ?? "primary";
   const size = params?.size ?? "md";
   classButton += " btn-" + variant + " btn-" + size;
-
+  classButton += " " + params?.class;
   params = {
     ...params,
     class: classButton,

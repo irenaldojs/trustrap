@@ -1,5 +1,5 @@
-import { Widget } from "../widgets";
-import { WidgetType } from "../widgetsType";
+import { Widget } from "..";
+import { WidgetType } from "../types/index.ts";
 
 export function _span(text: string, params?: WidgetType) {
   params = {

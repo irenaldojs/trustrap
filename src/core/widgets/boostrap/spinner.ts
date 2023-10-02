@@ -1,11 +1,11 @@
 import { Widget } from "..";
 import { WidgetType } from "../types/index.ts";
 
-export function _img(src: string, params?: WidgetType) {
+export function _bsSpinner(params?: WidgetType) {
   params = {
     ...params,
-    tag: "img",
-    src,
+    tag: "div",
+    class: params?.class + " spinner-border",
   };
   return new Widget(params);
 }

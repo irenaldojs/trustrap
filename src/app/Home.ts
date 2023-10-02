@@ -1,12 +1,7 @@
-import { Statefull } from "../core/statefull_core";
-import { Widget } from "../core/widgets/widgets";
-import { _div } from "../core/widgets/basic/div";
-import { _h1 } from "../core/widgets/basic/headText";
-import { _button } from "../core/widgets/basic/button";
-import { _bsButton } from "../core/widgets/boostrap/button";
-import { _span } from "../core/widgets/basic/span";
-import { _img } from "../core/widgets/basic/image";
-import { _faBrands, _faSolid } from "../core/widgets/fontAwesome/icons";
+import { Statefull, Widget } from "../core";
+import { _div, _h1, _img, _span } from "../core/widgets/basic";
+import { _bsButton } from "../core/widgets/boostrap";
+import { _faBrands, _faSolid } from "../core/widgets/fontAwesome";
 
 export default class Home extends Statefull {
   constructor(root: string) {
@@ -35,7 +30,8 @@ export default class Home extends Statefull {
               _h1("TruStrap", {
                 class: "mb-2 fw-bold text-light fst-italic",
               }),
-              _faSolid("graduation-cap", {
+              _faSolid({
+                iconName: "graduation-cap",
                 class:
                   "text-dark fs-1 rounded-5 p-1 text-center bg-light lh-1 ",
               }),
@@ -52,10 +48,12 @@ export default class Home extends Statefull {
                 _img("typescript.svg", {
                   class: "icon-home bg-light rounded p-1",
                 }),
-                _faBrands("font-awesome", {
+                _faBrands({
+                  iconName: "font-awesome",
                   class: "text-primary-emphasis bg-light rounded p-1 icon-home",
                 }),
-                _faBrands("bootstrap", {
+                _faBrands({
+                  iconName: "bootstrap",
                   class: "text-purple bg-light rounded p-1 icon-home",
                 }),
               ]

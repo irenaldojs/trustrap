@@ -1,6 +1,6 @@
-import { Widget } from "./widgets";
+import { Widget } from "..";
 
-export type AtributesType = {
+type AtributesType = {
   accept?: string; // form
   accesskey?: string; // global
   action?: string; // form
@@ -64,7 +64,7 @@ export type AtributesType = {
   wrap?: string; // textarea
 };
 
-export type EventsType = {
+type EventsType = {
   click?: Function;
   dblclick?: Function;
 
@@ -82,11 +82,12 @@ export type EventsType = {
   reset?: Function;
 };
 
-export type TruStrapWidgetType = {
+type TruStrapWidgetType = {
   tag?: string;
   observers?: Array<string>;
   children?: Array<Widget>;
 };
+
 export type WidgetType = AtributesType & EventsType & TruStrapWidgetType;
 
 export type ChildrenType = (Widget | string | number)[];
