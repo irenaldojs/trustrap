@@ -7,7 +7,7 @@
 - Bootstrap
 - FontAwesome
   <img src="https://github.com/irenaldojs/trustrap/blob/main/blob/print.png" />
-- [# Link para o Deploy <-- ](https://trustrap.netlify.app/) - Veja a versão ao vivo do projeto em ação!
+- [# Link para o Deploy: https://trustrap.netlify.app <-- ](https://trustrap.netlify.app/) - Veja a versão ao vivo do projeto em ação!
 
 **Instalacao**
 
