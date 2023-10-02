@@ -6,7 +6,7 @@
 - Vite
 - Bootstrap
 - FontAwesome
-  <img src="https://github.com/irenaldojs/trustrap/blob/atual/public/tela_trustrap.png" />
+  <img src="https://github.com/irenaldojs/trustrap/blob/print.png" />
 - [# Link para o Deploy <-- ](https://trustrap.netlify.app/) - Veja a versão ao vivo do projeto em ação!
 
 **Instalacao**
