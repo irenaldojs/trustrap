@@ -15,14 +15,16 @@ class TruStrap {
   constructor(routes: RouterType) {
     this.routes = routes;
     this.navigation();
+    window.addEventListener("popstate", () => this.navigation());
   }
   navigation(path?: string) {
     let instantiate = true;
+    const oldRoute = this.getRoute();
 
-    if (path && path !== this.getRoute()) {
-      this.changeRoute(path);
+    if (path && path !== oldRoute) {
+      this.changeRoute(path, oldRoute);
     } else if (!path) {
-      path = this.getRoute();
+      path = oldRoute;
     }
 
     this.instances.forEach((instance) => {
@@ -45,16 +47,16 @@ class TruStrap {
 
   getRoute(): string {
     const params = this.getAllParams();
-    const route = params["route"] ?? "/";
+    const route = params["r"] ?? "/";
     if (route[0] !== "/") {
-      return "/" + route;
+      return route;
     }
     return route;
   }
 
   getParams(): any {
     const newParams = this.getAllParams();
-    delete newParams["route"];
+    delete newParams["r"];
     return newParams;
   }
 
@@ -73,13 +75,13 @@ class TruStrap {
     return params;
   }
 
-  changeRoute(path: string) {
+  changeRoute(newRoute: string, oldRoute: string) {
     const baseURL = window.location.origin;
-    if (path !== "/") {
-      const newUrl = baseURL + "?route=" + path;
-      window.history.pushState({}, "", newUrl);
+    if (newRoute !== "/") {
+      const newUrl = baseURL + "?r=" + newRoute;
+      window.history.pushState({}, oldRoute, newUrl);
     } else {
-      window.history.pushState({}, "", "/");
+      window.history.pushState({}, oldRoute, "/");
     }
   }
 }

@@ -8,8 +8,8 @@ import { RouterType, createTruStrap } from "./core";
 
 const routers: RouterType = {
   "/": { page: Home, root: "app" },
-  "/novaRota": { page: NovaRota, root: "app" },
-  "/pokedex": { page: Pokedex, root: "app" },
+  novaRota: { page: NovaRota, root: "app" },
+  pokedex: { page: Pokedex, root: "app" },
 };
 
 createTruStrap(routers);

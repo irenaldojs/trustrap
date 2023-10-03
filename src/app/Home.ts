@@ -82,7 +82,7 @@ export default class Home extends Statefull {
                   {
                     variant: "primary",
                     size: "lg",
-                    click: () => this.navigation("/novaRota"),
+                    click: () => this.navigation("novaRota"),
                   },
                   ["Nova Rota"]
                 ),
@@ -90,7 +90,7 @@ export default class Home extends Statefull {
                   {
                     variant: "primary",
                     size: "lg",
-                    click: () => this.navigation("/pokedex"),
+                    click: () => this.navigation("pokedex"),
                   },
                   ["Pokedex"]
                 ),
