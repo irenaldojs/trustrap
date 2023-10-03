@@ -20,22 +20,11 @@ export abstract class Statefull {
     this.mountState();
     this.virtualDom = this.render();
     this.renderDom();
-    this.mountFutureBuild();
   }
 
   abstract render(): Widget;
   mountState(): void {}
-  mountFutureBuild(): void {}
 
-  /**
-   * Renders the DOM.
-   *
-   * This function creates the virtual DOM element using the `createElement` method of the `virtualDom`
-   * object, if it exists. If the virtual DOM element is successfully created, the function then calls
-   * the `renterTree` method to render the tree.
-   *
-   * @returns {void} This function does not return a value.
-   */
   renderDom(): void {
     const parent = document.getElementById(this.root);
 
@@ -44,36 +33,15 @@ export abstract class Statefull {
       this.virtualDom?.renderElement(parent, 0);
     }
   }
-  /**
-   * Creates a new state with the given name and value.
-   *
-   * @param {string} nameState - The name of the state to create.
-   * @param {any} value - The value to assign to the state.
-   * @return {void} This function does not return anything.
-   */
   createState(nameState: string, value: any): void {
     this.state = {
       ...this.state,
       [nameState]: value,
     };
   }
-  /**
-   * Retrieves the value of a specific state property.
-   *
-   * @param {string} name - The name of the state property to retrieve.
-   * @return {any} The value of the specified state property.
-   */
   getState(name: string): any {
     return this.state[name];
   }
-
-  /**
-   * Updates the state with a new value.
-   *
-   * @param {string} stateName - The name of the state to update.
-   * @param {any} value - The new value to assign to the state.
-   * @throws {Error} If the value is invalid.
-   */
   setState(stateName: string, value: any): void {
     this.state = {
       ...this.state,
@@ -81,11 +49,6 @@ export abstract class Statefull {
     };
     this.updateVirtualDom(stateName);
   }
-  /**
-   * Updates the virtual DOM by performing a full re-render of the component.
-   *
-   * @param {string} nameState - The name of the state to update.
-   */
   updateVirtualDom(nameState: string) {
     var newVirtualDom = this.render();
     let list: Array<Widget> = [];
@@ -108,13 +71,6 @@ export abstract class Statefull {
 
     this.virtualDom = newVirtualDom;
   }
-  /**
-   * Updates the state of the tree.
-   *
-   * @param {Widget} widget - The widget to update the state for.
-   * @param {string} nameState - The name of the state to update.
-   * @param {Function} pushList - The function to push the child widget to the list.
-   */
   updateTreeState(widget: Widget, nameState: string, pushList: Function) {
     widget.children?.forEach((child) => {
       if (child instanceof Widget) {
@@ -129,7 +85,6 @@ export abstract class Statefull {
       }
     });
   }
-
   navigation(path: string) {
     this.app?.navigation(path);
   }
