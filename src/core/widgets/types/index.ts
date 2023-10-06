@@ -54,7 +54,6 @@ type AtributesType = {
   src?: string; // audio, embed, iframe, img, input, script, source, track, video
   srcdoc?: string; // iframe
   step?: string; // input
-  style?: string; // global
   summary?: string; // table
   target?: string; // a, area, base, form
   title?: string; // global
@@ -86,6 +85,63 @@ type TruStrapWidgetType = {
   tag?: string;
   observers?: Array<string>;
   children?: Array<Widget>;
+  style?: StyleWidget;
+};
+
+export type StyleWidget = {
+  color?: string;
+  fontFamily?: string;
+  fontSize?: string;
+  fontWeight?: string;
+  textAlign?: string;
+  textDecoration?: string;
+  textTransform?: string;
+  verticalAlign?: string;
+  width?: string;
+  height?: string;
+  padding?: string;
+  margin?: string;
+  border?: string;
+  borderRadius?: string;
+  backgroundColor?: string;
+  backgroundImage?: string;
+  backgroundPosition?: string;
+  backgroundRepeat?: string;
+  backgroundSize?: string;
+  lineHeight?: string;
+  display?: string;
+  position?: string;
+  top?: string;
+  left?: string;
+  right?: string;
+  bottom?: string;
+  zIndex?: string;
+  opacity?: string;
+  visibility?: string;
+  transform?: string;
+  transformOrigin?: string;
+  transition?: string;
+  transitionDuration?: string;
+  transitionTimingFunction?: string;
+  transitionDelay?: string;
+  listStyle?: string;
+  boxShadow?: string;
+  cursor?: string;
+  boxSizing?: string;
+  overflow?: string;
+  textOverflow?: string;
+  whiteSpace?: string;
+  outline?: string;
+  pointerEvents?: string;
+  direction?: string;
+  columnCount?: string;
+  columnGap?: string;
+  columnRule?: string;
+  columnRuleWidth?: string;
+  columnRuleStyle?: string;
+  columnRuleColor?: string;
+  columnSpan?: string;
+  columnWidth?: string;
 };
 
 export type WidgetType = AtributesType & EventsType & TruStrapWidgetType;

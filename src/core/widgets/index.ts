@@ -59,8 +59,22 @@ class Widget {
       } else if (!isType.includes(key as Types)) {
         this.element.setAttribute(key, object[key]);
       }
+
+      if (key == "style") {
+        let style: string = "";
+        for (let key2 in object[key]) {
+          const atributte =
+            formatNameStyle(key2) + ":" + object[key][key2] + ";";
+          style += atributte;
+        }
+        this.element.style.cssText = style;
+      }
     }
   }
+}
+
+function formatNameStyle(name: string): string {
+  return name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
 }
 
 export { Widget };

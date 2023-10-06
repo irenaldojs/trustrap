@@ -17,6 +17,9 @@ export default class Home extends Statefull {
       {
         class:
           "vh-100 d-flex justify-content-center align-items-center bg-home px-2 px-sm-0 rounded",
+        style: {
+          backgroundSize: "cover",
+        },
       },
       [
         _div(
